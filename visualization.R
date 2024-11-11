@@ -103,6 +103,41 @@ barplot(airquality$Ozone,
 
 
 
+# Histogram for Maximum Daily Temperature
+
+hist(airquality$Temp , main = 'La Guardia Airports Maximum Temperature(daily)',
+     xlab = 'Temperature(Fahrenheit',
+     xlim = c(50, 125), col = 'yellow',
+     freq = TRUE
+     )
+
+
+
+boxplot(airquality$Wind, main = 'Average wind speed at 
+         \ at La Guardia Airport',
+        xlab = 'Miles per hour ', ylab = 'wind',
+        col = 'orange', border = 'brown',
+        horizontal = TRUE,notch = TRUE
+        )
+
+
+worldcities
+
+
+df <- data.frame(world.cities)
+
+
+
+# Load the required libraries
+library(maps)
+map(database = "world")
+
+# marking points on map
+points(x = df$lat[1:500], y = df$lng[1:500], col = "Red")
+
+
+
+
 
 
 
