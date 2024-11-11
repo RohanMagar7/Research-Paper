@@ -63,8 +63,43 @@ ggplot(df,aes(x = Age, y = Score)) +
 
 
 
+# colors and shapes : Customize colors or shapes bases on another vairable.
+ggplot(df, aes(x = Age, y = Score, color= Name, shape = Name)) + 
+  geom_point(size = 3)
 
 
+
+
+# Theme Modify the appearance fo your plot
+
+ggplot(df, aes(x = Age, y = Score)) + 
+  geom_point() +
+  theme_minimal() +
+  labs(title = 'Scatter plot with Minimal Theme')
+
+
+
+
+# Title , labels, and Legends : Add custom title , Axis labesl, and adjust legends,
+
+ggplot(df, aes(x = Age, y = Score)) + 
+  geom_point(color = 'darkgreen') +
+  labs (
+    title = 'Scatter plot of Age vs. Score',
+    subtitle ='A closer look at the relationship between Age and Score',
+    x = 'Age',
+    y = 'Score'
+  )
+
+
+
+airquality
+
+
+barplot(airquality$Ozone,
+        main = 'Ozone concentration in air',
+        xlab = 'Ozone levels', horiz = FALSE
+        )
 
 
 
