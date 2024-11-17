@@ -62,8 +62,11 @@ write.csv(phd_all, file = "F:/Data science/Data analysis/filtered/phd_all.csv")
 
 library(ggplot2)
 
+diamonds
+nrow(diamonds)
+ncol(diamonds)
 
-
+?diamonds
 
 
 
