@@ -24,7 +24,7 @@ view(df)
 View(bamu)
 
 
-summary(bamu)
+view(summary(bamu))
 
 
 unmarried <- is.na(bamu$MARITAL.STATUS)
@@ -36,9 +36,10 @@ duplicated(bamu$MARITAL.STATUS)
 str_to_upper(bamu$MARITAL.STATUS)
 
 
-head(bamu)
-tail(bamu)
-summary(bamu)
+view(head(bamu))
+view(tail(bamu))
+view(summary(tail(bamu)))
+
 grouping(bamu$MARITAL.STATUS)
 
 
@@ -62,28 +63,42 @@ install.packages('stringdist')
 library(dplyr)
 library(stringdist)
 
-# Assuming your dataset is already loaded and named `data`
-# Column name for colleges is `UG.INSTITUTE.COLLEGE`
 
-# Step 1: Preprocess college names
 data <- bamu %>%
   mutate(
     College_Cleaned = UG.INSTITUTE.COLLEGE %>%
-      tolower() %>% # Convert to lowercase
+      tolower() %>% 
       stringr::str_replace_all("[^a-z0-9 ]", "") %>% 
       stringr::str_squish() 
   )
 
+view(data$College_Cleaned)
+
+
+# Step 2: Remove missing or empty College_Cleaned values
+data <- data %>%
+  filter(!is.na(College_Cleaned) & College_Cleaned != "")
+
+
+
 
 distance_matrix <- stringdistmatrix(data$College_Cleaned, data$College_Cleaned, method = "jw")
 
-view(distance_matrix)
+
+# Check for invalid values in the distance matrix
+
+
+if (any(is.na(distance_matrix))) {
+  stop("Distance matrix contains NA values. Check your data preprocessing.")
+}
+
+
 
 
 hclust_res <- hclust(as.dist(distance_matrix), method = "average")
 
 
-num_clusters <- 200
+num_clusters <- 200 
 cluster_assignments <- cutree(hclust_res, k = num_clusters)
 
 
@@ -94,7 +109,25 @@ data <- data %>%
   ungroup()
 
 
-write.csv(data, "cleaned_college_data.csv", row.names = FALSE)
+view(data$Consistent_College_Name)
+
+
+write.csv(data, "Downloads/cleaned_college_data.csv", row.names = FALSE)
 
 
 print(data %>% select(UG.INSTITUTE.COLLEGE, Consistent_College_Name) %>% head(20))
+
+
+
+view(data)
+
+
+view(data$UG.INSTITUTE.COLLEGE)
+
+view(data$Consistent_College_Name)
+
+
+
+
+print(data$Consistent_College_Name)
+
