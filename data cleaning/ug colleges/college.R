@@ -151,6 +151,59 @@ v3 <- c(7, 8)
 cbind(v1,v3)
 
 
+# apply()
+mat <- matrix(1:9, nrow = 3, byrow = TRUE)
+mat
+
+
+# 1 = rowwise
+apply(mat,1,sum)
+
+# 2 = column wise
+apply(mat,2,mean)
+
+# lapply()
+
+# Applies a function over elements of a list or vector and returns a list.
+
+# syntax : lapply(A list or vector, FUN,Additional arguments passed to FUN)
+
+lst <- list(a = 1:5, b = 6:10)
+lst
+
+
+lapply(lst,sum)
+
+#sapply() Applies a function over elements of a list or vector and 
+# returns a simplified result (vector or matrix).
+
+
+sapply(lst,sum)
+
+# tapply() : Applies a function to subsets of a vector, split by factors.
+
+
+
+
+ages <- c(25, 30, 35, 40, 45)
+genders <- c("M", "F", "M", "F", "M")
+
+# Apply mean to age subsets gropued by gender
+tapply(ages, genders, mean)
+
+
+
+# mapply() Applies a function to multiple arguments in parallel.
+
+
+# mapply(FUN, ..., MoreArgs = NULL, SIMPLIFY = TRUE)
+
+
+mapply(sum,1:5,6:10)
+
+
+
+
 
 
 
