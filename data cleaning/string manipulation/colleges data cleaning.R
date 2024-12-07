@@ -70,31 +70,31 @@ data <- bamu %>%
   mutate(
     College_Cleaned = UG.INSTITUTE.COLLEGE %>%
       tolower() %>% # Convert to lowercase
-      stringr::str_replace_all("[^a-z0-9 ]", "") %>% # Remove special characters
-      stringr::str_squish() # Remove extra whitespace
+      stringr::str_replace_all("[^a-z0-9 ]", "") %>% 
+      stringr::str_squish() 
   )
 
-# Step 2: Generate a distance matrix for clustering
+
 distance_matrix <- stringdistmatrix(data$College_Cleaned, data$College_Cleaned, method = "jw")
 
-# Step 3: Perform clustering
+view(distance_matrix)
+
+
 hclust_res <- hclust(as.dist(distance_matrix), method = "average")
 
-# Step 4: Cut the dendrogram into clusters
-# Adjust `k` based on the variety of colleges in your data
-num_clusters <- 200 # You can change this based on inspection
+
+num_clusters <- 200
 cluster_assignments <- cutree(hclust_res, k = num_clusters)
 
-# Step 5: Assign consistent names to each cluster
-# Use the first name in each cluster as the representative
+
 data <- data %>%
   mutate(Cluster = cluster_assignments) %>%
   group_by(Cluster) %>%
   mutate(Consistent_College_Name = first(UG.INSTITUTE.COLLEGE)) %>%
   ungroup()
 
-# Step 6: Save the cleaned dataset
+
 write.csv(data, "cleaned_college_data.csv", row.names = FALSE)
 
-# Optional: Preview the first few rows of cleaned data
+
 print(data %>% select(UG.INSTITUTE.COLLEGE, Consistent_College_Name) %>% head(20))
