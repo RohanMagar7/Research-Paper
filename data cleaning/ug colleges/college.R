@@ -1,5 +1,8 @@
-library(ggplot2)
+install.packages("stringdist")
 
+
+library(ggplot2)
+library(stringdist)
 
 bamu
 
@@ -10,3 +13,8 @@ nrow(unique_colleges)
 ncol(unique_colleges)
 length(unique_colleges)
 view(unique_colleges)
+
+
+
+
+
