@@ -205,10 +205,66 @@ mapply(sum,1:5,6:10)
 
 
 
+#The aggregate() function in R is used to apply a 
+#function to subsets of data, grouped by one or more 
+#factors. It is particularly useful for summarizing data 
+#(e.g., calculating mean, sum, or other statistics) by groups.
 
 
+# aggregate(x, by, FUN, ..., simplify = TRUE)
+
+# Data
+values <- c(10, 20, 30, 40, 50)
+groups <- c("A", "A", "B", "B", "B")
+
+# Calculate the mean for each group
+aggregate(values,by=list(Group = groups),FUN=mean)
 
 
+# aggregating a Data Frame
+
+df<- data.frame(
+  ID = 1:6,
+  Group = c('A','A','B','B','C','C'),
+  Score = c(85,90,78,88,92,95)
+)
+df
+
+
+aggregated_per <- aggregate(Score ~ Group, data = df, FUN = mean)
+
+
+aggregated_per$Passed <- TRUE 
+aggregated_per
+
+# Multiple Grouping Variable
+# Data frame with multiple grouping variables
+df <- data.frame(
+  Group = c("A", "A", "B", "B", "C", "C"),
+  Gender = c("M", "F", "M", "F", "M", "F"),
+  Score = c(85, 90, 78, 88, 92, 95)
+)
+
+
+df
+
+
+# Calculate mean Score by Group and Gender
+
+aggregate(Score ~ Group + Gender, data = df, FUN = mean)
+
+
+# Aggregateing Multiple Columns 
+# Data frame with multipel columsn
+
+df <- data.frame(
+  Group = c("A", "A", "B", "B", "C", "C"),
+  Score1 = c(85, 90, 78, 88, 92, 95),
+  Score2 = c(70, 75, 80, 85, 90, 95)
+)
+
+
+aggregate(.~Group, data= df, FUN = mean)
 
 
 
