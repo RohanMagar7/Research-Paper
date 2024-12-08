@@ -85,11 +85,17 @@ view(levels(bamudb$PROGRAMME.NAME1))
 ggplot(levels(bamudb$PROGRAMME.NAME1, mapping = aes())
 
 
+       
+levels(bamudb$PROGRAMME.NAME1)
+
+names(bamudb)
+
+names(bamudb)
 
 
-
-
-
+view(bamudb %>% 
+       select(PROGRAMME.NAME1 ,starts_with('DOCTOR OF PHILOSOPHY'))
+)
 
 
 
