@@ -3,6 +3,7 @@ install.packages('data.table')
 
 library(data.table)
 library(tidyverse)
+library(dplyr)
 
 bamudb <- fread("F:/Data science/Data analysis/bamudb.csv", na.strings = c("", "NA", "\0"))
 
@@ -34,6 +35,52 @@ print(length(bamudb$GENDER))
 
 nrow(bamudb)
 ncol(bamudb)
+
+
+# R datasets available 
+data()
+
+
+# variable types 
+# use glimpse() to check rows and columns other nrow and ncol
+
+glimpse(bamudb)
+
+unique(bamudb$GENDER)
+
+view(group_by(unique(bamudb$GENDER)))
+
+view(unique(bamudb$GENDER))
+
+length(unique(bamudb$GENDER))
+bamudb$GENDER1 <- as.factor(bamudb$GENDER)
+
+class(bamudb$GENDER1)
+
+glimpse(bamudb$GENDER1)
+view(bamudb$GENDER1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
