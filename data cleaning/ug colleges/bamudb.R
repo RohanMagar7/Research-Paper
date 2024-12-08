@@ -5,6 +5,8 @@ library(data.table)
 library(tidyverse)
 library(dplyr)
 
+library(ggplot2)
+
 bamudb <- fread("F:/Data science/Data analysis/bamudb.csv", na.strings = c("", "NA", "\0"))
 
 
@@ -59,6 +61,30 @@ class(bamudb$GENDER1)
 
 glimpse(bamudb$GENDER1)
 view(bamudb$GENDER1)
+
+class(bamudb$PROGRAMME.NAME)
+
+
+length(unique(bamudb$PROGRAMME.NAME))
+
+bamudb$PROGRAMME.NAME1 <- as.factor(bamudb$PROGRAMME.NAME)
+
+
+class(bamudb$PROGRAMME.NAME1)
+
+
+glimpse(bamudb$PROGRAMME.NAME1)
+
+levels(bamudb$PROGRAMME.NAME1)
+
+
+view(levels(bamudb$PROGRAMME.NAME1))
+
+
+
+ggplot(levels(bamudb$PROGRAMME.NAME1, mapping = aes())
+
+
 
 
 
