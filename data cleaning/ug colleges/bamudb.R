@@ -1,21 +1,24 @@
-library(tidyverse)
-install.packages('data.table')
+#install.packages('data.table')
 
+library(tidyverse)
 library(data.table)
 library(tidyverse)
 library(dplyr)
-
 library(ggplot2)
+
+library(readr)
 
 bamudb <- fread("F:/Data science/Data analysis/bamudb.csv", na.strings = c("", "NA", "\0"))
 
 
-library(readr)
 
 
 
 
 bamudb <- read_csv('F:/Data science/Data analysis/bamudb.csv')
+
+
+problems(bamudb) 
 
 
 bamudb <- read.csv('F:/Data science/Data analysis/bamudb.csv')
@@ -84,6 +87,11 @@ view(levels(bamudb$PROGRAMME.NAME1))
 
 ggplot(levels(bamudb$PROGRAMME.NAME1, mapping = aes())
 
+       
+ggplot(bamudb,aes(x = unique(GENDER1), y = GENDER1)) + 
+  geom_bar(fill = 'purple') + 
+  labs(title = 'box plto of score ', x = '', y = 'Score')       
+       
 
        
 levels(bamudb$PROGRAMME.NAME1)
@@ -96,6 +104,29 @@ names(bamudb)
 view(bamudb %>% 
        select(PROGRAMME.NAME1 ,starts_with('DOCTOR OF PHILOSOPHY'))
 )
+
+
+
+# Example data
+PROGRAMME.NAMES <- data.frame(category = bamudb$PROGRAMME.NAME1)
+
+# Count occurrences
+
+view(PROGRAMME.NAMES)
+
+
+programcountes <- table(PROGRAMME.NAMES$category)
+print(programcountes)
+view(programcountes)
+
+programcountes <- data.frame(programcountes)
+
+
+view(programcountes$)
+
+ggplot(programcountes,aes(x=Var1 , y=Freq ))+
+  geom_bar(fill = 'purple') + 
+  labs(title = 'programes ', x = 'Names of the Programes', y = 'enrolled') 
 
 
 
