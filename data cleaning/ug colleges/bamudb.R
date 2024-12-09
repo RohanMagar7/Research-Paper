@@ -190,6 +190,7 @@ ggplot(top_programmes, aes(x = reorder(Var1, Freq), y = Freq, fill = Var1)) +
   theme(axis.text = element_text(size = 12), axis.title = element_text(size = 14))
 
 
+# Plotted a bar graph of top 10 programes and students 
 
 ggplot(top_programmes,aes(x=reorder(Var1,Freq), y=Freq,fill=Var1)) +
   geom_bar(stat = "identity",show.legend = FALSE) + # Different Colors for bars
