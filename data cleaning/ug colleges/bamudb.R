@@ -176,6 +176,22 @@ ggplot(top_programmes, aes(x = reorder(Var1, Freq), y = Freq)) +
 
 
 
+ggplot(top_programmes, aes(x = reorder(Var1, Freq), y = Freq, fill = Var1)) +
+  geom_bar(stat = "identity", show.legend = FALSE) +  # Different colors for bars
+  geom_text(aes(label = Freq), hjust = -0.2, size = 4) +  # Add labels to bars
+  scale_fill_manual(values = rainbow(nrow(top_programmes))) +  # Unique colors for bars
+  coord_flip() +
+  labs(
+    title = "Top Programmes by Enrollment",
+    x = "Programmes",
+    y = "Number of Students"
+  ) +
+  theme_minimal(base_size = 15) +  # Adjust label size
+  theme(axis.text = element_text(size = 12), axis.title = element_text(size = 14))
+
+
+
+
 
 
 
