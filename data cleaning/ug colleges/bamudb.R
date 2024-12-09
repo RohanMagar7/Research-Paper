@@ -122,15 +122,56 @@ view(programcountes)
 programcountes <- data.frame(programcountes)
 
 
-view(programcountes$)
+view(programcountes)
 
 ggplot(programcountes,aes(x=Var1 , y=Freq ))+
   geom_bar(fill = 'purple') + 
   labs(title = 'programes ', x = 'Names of the Programes', y = 'enrolled') 
 
+rlang::last_trace()
 
 
 
+
+# Example data
+set.seed(123)
+data <- data.frame(
+  programme = paste("Programme", 1:167),
+  students = sample(1:1000, 167, replace = TRUE)
+)
+
+# Summarize top 10 categories
+top_programmes <- programcountes %>%
+  arrange(desc(Freq)) %>%
+  slice(1:10)
+
+
+top_programmes <- data.frame(top_programmes)
+
+
+
+view(top_programmes)
+
+view(top_programmes$Freq)
+
+
+
+ggplot(top_programmes,aes(x = Var1 , y= Freq )) + 
+  geom_bar(stat = 'identity') +
+  labs( title = 'Top 10 programme', x = "Programme Name", y = 'Enrolled')
+
+
+
+
+ggplot(top_programmes, aes(x = reorder(Var1, Freq), y = Freq)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  coord_flip() +
+  labs(
+    title = "Top 10 Programmes by Enrollment",
+    x = "Programmes",
+    y = "Number of Students"
+  ) +
+  theme_minimal()
 
 
 
