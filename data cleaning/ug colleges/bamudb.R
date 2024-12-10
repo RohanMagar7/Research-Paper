@@ -175,7 +175,41 @@ ggplot(genderCounts, aes(x = Gender, y = Counts, fill = Gender)) +
 
 
 
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Relative Frequency >>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+# Calculate relative frequency
+genderCounts$RelativeFreq <- genderCounts$Counts / sum(genderCounts$Counts)
+
+view(genderCounts)
+
+# Create a pie chart
+ggplot(genderCounts, aes(x = "", y = RelativeFreq, fill = Gender)) +
+  geom_bar(stat = "identity", width = 1) +                # Bar for pie chart (uses identity stats)
+  coord_polar(theta = "y") +                              # Transform to a pie chart
+  geom_text(aes(label = scales::percent(RelativeFreq)),   # Add percentage labels
+            position = position_stack(vjust = 0.5), 
+            size = 4) +
+  scale_fill_manual(values = rainbow(nrow(genderCounts))) + # Custom colors
+  labs(
+    title = "Genderwise Enrollment - Relative Frequency",
+    x = NULL,
+    y = NULL,
+    fill = "Gender"
+  ) +
+  theme_void() +                                          # Remove axes and background
+  theme(
+    plot.title = element_text(size = 16, hjust = 0.5)    # Center-align the title
+  )
+
+
+
+
+
+
 #>
+
 #>
 #>
 #>
