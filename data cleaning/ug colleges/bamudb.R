@@ -140,38 +140,40 @@ view(genderCounts)
 #>
 genderCounts <- data.frame(genderCounts)
 
-genderCounts
 
-ggplot(genderCounts,aes(x=Gender,y= Counts) +
-  geom_bar() +
-    labs( title = 'Genderwise Enrollement',
-          x = 'Genders',
-          y = 'Enrolled students'
-    )
-)
+ggplot(genderCounts, aes(x = Gender, y = Counts))+
+  geom_bar(stat = "identity",fill='purple', show.legend = TRUE ) +  
+  scale_fill_manual(values=rainbow(nrow(genderCounts))) +
+  coord_cartesian() +
+  labs(
+    title = "Genderwise Enrollment",
+    x = "Genders",
+    y = "Enrolled Students" 
+    ) +
+  theme_minimal(base_size = 15) +  # Adjust label size
+  theme(axis.text = element_text(size = 12), axis.title = element_text(size = 14))
 
-ggplot(genderCounts, aes(x = Gender, y = Counts)) +
-  geom_bar(stat = "identity") +  
+
+
+
+
+ggplot(genderCounts, aes(x = Gender, y = Counts, fill = Gender)) +
+  geom_bar(stat = "identity", show.legend = TRUE) +                     # Bars with fill aesthetic
+  geom_text(aes(label = Counts), vjust = -0.5, size = 4) +             # Add labels at the top of bars
+  scale_fill_manual(values = rainbow(nrow(genderCounts))) +            # Apply custom colors
+  coord_cartesian() +                                                  # Default Cartesian coordinates
   labs(
     title = "Genderwise Enrollment",
     x = "Genders",
     y = "Enrolled Students"
+  ) +
+  theme_minimal(base_size = 15) +                                      # Minimal theme with adjusted base size
+  theme(
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 14)
   )
 
 
-
-ggplot(top_programmes,aes(x=reorder(Var1,Freq), y=Freq,fill=Var1)) +
-  geom_bar(stat = "identity",show.legend = FALSE) + # Different Colors for bars
-  geom_text(aes(label = Freq),hjust=0.2,size = 3 ) + 
-  scale_fill_manual(values = rainbow(nrow(top_programmes))) +
-  coord_flip() +
-  labs(
-    title = 'Top 10 Programmes',
-    x = 'Programmes',
-    y = 'Number of Students'
-  ) +
-  theme_minimal(base_size = 15) +  # Adjust label size
-  theme(axis.text = element_text(size = 12), axis.title = element_text(size = 14))
 
 #>
 #>
