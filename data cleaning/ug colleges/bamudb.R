@@ -180,9 +180,12 @@ ggplot(genderCounts, aes(x = Gender, y = Counts, fill = Gender)) +
 
 
 # Calculate relative frequency
+
 genderCounts$RelativeFreq <- genderCounts$Counts / sum(genderCounts$Counts) 
 
 view(genderCounts)
+
+summary(genderCounts)
 
 sum(genderCounts$RelativeFreq) 
 
@@ -204,6 +207,35 @@ ggplot(genderCounts, aes(x = "", y = RelativeFreq, fill = Gender)) +
   theme(
     plot.title = element_text(size = 16, hjust = 0.5)    # Center-align the title
   )
+
+
+df <- genderCounts
+
+ggplot(df, aes(x = Gender, y = Counts, fill = Gender)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label=Counts),vjust=-0.5,size=4) +
+  labs(title = "Gender Distribution", x = "Gender", y = "Count") +
+  theme_minimal()
+  
+df
+
+df_sorted <- df[order(-df$RelativeFreq),]
+
+# Total Count
+total_count <- sum(df$Counts)
+total_count
+
+
+
+df$Percentage <- df$Counts / total_count * 100
+print(df)
+
+
+
+
+
+
+
 
 
 
