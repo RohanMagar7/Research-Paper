@@ -180,9 +180,11 @@ ggplot(genderCounts, aes(x = Gender, y = Counts, fill = Gender)) +
 
 
 # Calculate relative frequency
-genderCounts$RelativeFreq <- genderCounts$Counts / sum(genderCounts$Counts)
+genderCounts$RelativeFreq <- genderCounts$Counts / sum(genderCounts$Counts) 
 
 view(genderCounts)
+
+sum(genderCounts$RelativeFreq) 
 
 # Create a pie chart
 ggplot(genderCounts, aes(x = "", y = RelativeFreq, fill = Gender)) +
