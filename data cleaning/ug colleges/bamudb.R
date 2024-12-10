@@ -110,12 +110,39 @@ view(bamudb %>%
 # Example data
 PROGRAMME.NAMES <- data.frame(category = bamudb$PROGRAMME.NAME1)
 
-# Count occurrences
+
+
+
 
 view(PROGRAMME.NAMES)
 
 
 programcountes <- table(PROGRAMME.NAMES$category)
+
+
+
+
+############ Creates a categorical Data >>>>>>>>>>>>>>>>>>>>>>>>>>
+
+gender <- data.frame(category = bamudb$GENDER)
+# Count occurrences
+view(gender$category)
+genderCounts <- table(gender$category)
+genderCounts <- as.data.frame(genderCounts)
+colnames(genderCounts) <- c("Gender","Counts")
+#gender count
+view(genderCounts)
+
+############ Creates a categorical Data >>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+
+
+
+
+
 print(programcountes)
 view(programcountes)
 
