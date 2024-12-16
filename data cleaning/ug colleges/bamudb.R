@@ -5,7 +5,6 @@ library(data.table)
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
-
 library(readr)
 
 bamudb <- fread("F:/Data science/Data analysis/bamudb.csv", na.strings = c("", "NA", "\0"))
@@ -21,7 +20,7 @@ bamudb <- read_csv('F:/Data science/Data analysis/bamudb.csv')
 problems(bamudb) 
 
 
-bamudb <- read.csv('F:/Data science/Data analysis/bamudb.csv')
+data <- read.csv('F:/Data science/Data analysis/bamudb.csv')
 
 phd_all <- read_csv('F:/Data science/Data analysis/filtered/phd_all.csv')
 
@@ -350,14 +349,61 @@ ggplot(top_programmes,aes(x=reorder(Var1,Freq), y=Freq,fill=Var1)) +
 
 
 
+library(DBI)
+library(RMySQL) 
+
+
+
+# Infer column types
+col_types <- sapply(data, class)
 
 
 
 
 
 
+# Map R data types to MySQL data types
+type_mapping <- function(r_type) {
+  switch(r_type,
+         "character" = "VARCHAR(255)",
+         "integer" = "INT",
+         "numeric" = "DOUBLE",
+         "logical" = "BOOLEAN",
+         "factor" = "VARCHAR(255)",
+         "Date" = "DATE",
+         "POSIXct" = "DATETIME",
+         "TEXT")  # Default
+}
 
 
+view(type_mapping)
+
+
+mysql_types <- sapply(col_types, type_mapping)
+
+
+view(mysql_types)
+
+
+# Generate CREATE TABLE SQL query
+table_name <- "bamudb"
+
+print(table_name)
+
+create_table_query <- paste(
+  "CREATE TABLE", table_name, "(\n",
+  paste(paste0("`", names(mysql_types), "` ", mysql_types), collapse = ",\n"),
+  "\n);"
+)
+
+
+print(create_table_query)
+
+cat("Generated SQL Query:\n", create_table_query)
+
+
+
+write.csv(data, file = "F:/Data science/Data analysis/data filtered/bamudb.csv")
 
 
 

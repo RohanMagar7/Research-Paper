@@ -162,6 +162,13 @@ persp(x, y, z,
 
 
 
+install.packages("DBI")
+install.packages("RMySQL")  # or RMariaDB
+
+
+library(DBI)
+library(RMySQL)
+
 
 
 

@@ -1,4 +1,4 @@
-install.packages("stringdist")
+#install.packages("stringdist")
 
 
 library(ggplot2)
@@ -265,6 +265,16 @@ df <- data.frame(
 
 
 aggregate(.~Group, data= df, FUN = mean)
+
+
+
+
+
+
+
+
+
+
 
 
 
