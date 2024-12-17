@@ -156,11 +156,11 @@ ggplot(levels(bamudb$PROGRAMME.NAME1, mapping = aes())
        
        
        
-       ggplot(genderCounts, aes(x = Gender, y = Counts, fill = Gender)) +
-         geom_bar(stat = "identity", show.legend = TRUE) +                     # Bars with fill aesthetic
-         geom_text(aes(label = Counts), vjust = -0.5, size = 4) +             # Add labels at the top of bars
-         scale_fill_manual(values = rainbow(nrow(genderCounts))) +            # Apply custom colors
-         coord_cartesian() +                                                  # Default Cartesian coordinates
+  ggplot(genderCounts, aes(x = Gender, y = Counts, fill = Gender)) +
+    geom_bar(stat = "identity", show.legend = TRUE) +                     # Bars with fill aesthetic
+    geom_text(aes(label = Counts), vjust = -0.5, size = 4) +             # Add labels at the top of bars
+    scale_fill_manual(values = rainbow(nrow(genderCounts))) +            # Apply custom colors
+    coord_cartesian() +                                                  # Default Cartesian coordinates
          labs(
            title = "Genderwise Enrollment",
            x = "Genders",
@@ -182,11 +182,18 @@ ggplot(levels(bamudb$PROGRAMME.NAME1, mapping = aes())
        
        genderCounts$RelativeFreq <- genderCounts$Counts / sum(genderCounts$Counts) 
        
+       view(sum(genderCounts$Counts))
+       
        view(genderCounts)
        
        summary(genderCounts)
        
-       sum(genderCounts$RelativeFreq) 
+       view(genderCounts$Counts)
+       
+       view(genderCounts)
+       
+       print(sum(genderCounts$RelativeFreq) )
+      
        
        # Create a pie chart
        ggplot(genderCounts, aes(x = "", y = RelativeFreq, fill = Gender)) +
@@ -210,15 +217,20 @@ ggplot(levels(bamudb$PROGRAMME.NAME1, mapping = aes())
        
        df <- genderCounts
        
-       ggplot(df, aes(x = Gender, y = Counts, fill = Gender)) +
-         geom_bar(stat = "identity") +
+       ggplot(df_sorted, aes(x = Gender, y = Counts, fill = Gender)) +
+         geom_bar(stat = "identity",width = 0.5) +
          geom_text(aes(label=Counts),vjust=-0.5,size=4) +
          labs(title = "Gender Distribution", x = "Gender", y = "Count") +
          theme_minimal()
        
        df
        
-       df_sorted <- df[order(-df$RelativeFreq),]
+       df_sorted <- df[order(-df$Counts),]
+      
+       df_sorted <- data.frame(df_sorted)
+       
+       view(df_sorted)
+       
        
        # Total Count
        total_count <- sum(df$Counts)
