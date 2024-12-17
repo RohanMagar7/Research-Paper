@@ -106,20 +106,19 @@ ggplot(levels(bamudb$PROGRAMME.NAME1, mapping = aes())
        
        
        
+       
+       ############ Creates a categorical Data >>>>>>>>>>>>>>>>>>>>>>>>>>
+       # using programme name 
+       
        # Example data
-       PROGRAMME.NAMES <- data.frame(category = bamudb$PROGRAMME.NAME1)
-       
-       
-       
-       
-       
+       PROGRAMME.NAMES <- data.frame(category = bamudb$PROGRAMME.NAME)
        view(PROGRAMME.NAMES)
-       
-       
        programcountes <- table(PROGRAMME.NAMES$category)
-       
-       
-       
+       view(programcountes)
+       programcountes <- as.data.frame(programcountes)
+       view(programcountes)
+       colnames(programcountes) <- c('Programme Name','Programme Count')
+       view(programcountes)
        
        ############ Creates a categorical Data >>>>>>>>>>>>>>>>>>>>>>>>>>
        
