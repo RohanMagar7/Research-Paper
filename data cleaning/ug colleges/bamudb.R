@@ -300,6 +300,7 @@ ggplot(levels(bamudb$PROGRAMME.NAME1, mapping = aes())
          slice(1:10)
        
        
+       
        top_programmes <- data.frame(top_programmes)
        
        
