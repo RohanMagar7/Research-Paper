@@ -111,7 +111,7 @@ ggplot(levels(bamudb$PROGRAMME.NAME1, mapping = aes())
        # using programme name 
        
        # Example data
-       PROGRAMME.NAMES <- data.frame(category = bamudb$PROGRAMME.NAME)
+PROGRAMME.NAMES <- data.frame(category = bamudb$PROGRAMME.NAME)
        view(PROGRAMME.NAMES)
        programcountes <- table(PROGRAMME.NAMES$category)
        view(programcountes)
@@ -286,6 +286,9 @@ ggplot(levels(bamudb$PROGRAMME.NAME1, mapping = aes())
        
        
        
+       
+       
+       
        # Example data
        set.seed(123)
        data <- data.frame(
@@ -293,9 +296,13 @@ ggplot(levels(bamudb$PROGRAMME.NAME1, mapping = aes())
          students = sample(1:1000, 167, replace = TRUE)
        )
        
+       view(data)
+       
+       
+       
        # Summarize top 10 categories
        top_programmes <- programcountes %>%
-         arrange(desc(Freq)) %>%
+         arrange(desc(Programme.Count)) %>%
          slice(1:10)
        
        
@@ -306,19 +313,19 @@ ggplot(levels(bamudb$PROGRAMME.NAME1, mapping = aes())
        
        view(top_programmes)
        
-       view(top_programmes$Freq)
+       view(top_programmes$Programme.Count)
        
        
        
-       ggplot(top_programmes,aes(x = Var1 , y= Freq )) + 
+       ggplot(top_programmes,aes(x = Programme.Name , y= Programme.Count )) + 
          geom_bar(stat = 'identity') +
          labs( title = 'Top 10 programme', x = "Programme Name", y = 'Enrolled')
        
        
        
        
-       ggplot(top_programmes, aes(x = reorder(Var1, Freq), y = Freq)) +
-         geom_bar(stat = "identity", fill = "steelblue") +
+       ggplot(top_programmes, aes(x = reorder(Programme.Name, Programme.Count), y = Programme.Count)) +
+         geom_bar(stat = "identity") +
          coord_flip() +
          labs(
            title = "Top 10 Programmes by Enrollment",
@@ -330,9 +337,9 @@ ggplot(levels(bamudb$PROGRAMME.NAME1, mapping = aes())
        
        
        
-       ggplot(top_programmes, aes(x = reorder(Var1, Freq), y = Freq, fill = Var1)) +
+       ggplot(top_programmes, aes(x = reorder(Programme.Name, Programme.Count), y = Programme.Count, fill = Programme.Name)) +
          geom_bar(stat = "identity", show.legend = FALSE) +  # Different colors for bars
-         geom_text(aes(label = Freq), hjust = -0.2, size = 4) +  # Add labels to bars
+         geom_text(aes(label = Programme.Count), hjust = -0.2, size = 4) +  # Add labels to bars
          scale_fill_manual(values = rainbow(nrow(top_programmes))) +  # Unique colors for bars
          coord_flip() +
          labs(
@@ -346,9 +353,9 @@ ggplot(levels(bamudb$PROGRAMME.NAME1, mapping = aes())
        
        # Plotted a bar graph of top 10 programes and students 
        
-       ggplot(top_programmes,aes(x=reorder(Var1,Freq), y=Freq,fill=Var1)) +
+       ggplot(top_programmes,aes(x=reorder(Programme.Name,Programme.Count), y=Programme.Count,fill=Programme.Name)) +
          geom_bar(stat = "identity",show.legend = FALSE) + # Different Colors for bars
-         geom_text(aes(label = Freq),hjust=0.2,size = 3 ) + 
+         geom_text(aes(label = Programme.Count),hjust=0.2,size = 3 ) + 
          scale_fill_manual(values = rainbow(nrow(top_programmes))) +
          coord_flip() +
          labs(
