@@ -1,5 +1,13 @@
 expanded_path <- path.expand('-')
 
+library(tidyverse)
+library(data.table)
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(readr)
+
+
 expanded_path
 
 
@@ -37,3 +45,72 @@ dir(pattern = 'create')
 
 # creating a file
 file.create('learning.R')
+
+library(ggplot2)
+
+
+ggplot(data=diamonds,aes(x=price))+
+  geom_histogram()
+
+
+
+ggplot(data=diamonds,aes(x=price))+
+  geom_histogram(fill='green',col='orange')
+
+
+ggplot(diamonds,aes(x=price))+
+  geom_bar()
+
+
+ggplot(data = diamonds,aes(x=cut,fill = cut))+
+  geo_bar()
+
+
+
+view(diamonds)
+
+
+ggplot(data = diamonds,aes(x=carat,y=price,col=cut))+
+  geom_point()
+
+
+
+ggplot(data=diamonds,aes(x=clarity,y=carat)) +
+  geom_boxplot()
+
+
+ggplot(data=diamonds,aes(x=clarity,y=carat,fill=cut))+
+  geom_boxplot()
+
+
+
+
+clean$data <- diamonds[!duplicated(data),]
+
+view(clean)
+
+view(clean$data)
+
+
+
+# remove duplicates 
+duplicate <- bamudb$PROGRAMME.NAME
+cleandata <- duplicate[!duplicated(duplicate)]
+view(cleandata)
+
+
+
+# Explore how duplicated() flags dulicate rows 
+
+# Experiment with growing variables to identify duplicates in specific columns 
+
+
+# Handle Missing DAta
+
+
+
+
+
+
+
+
