@@ -108,6 +108,17 @@ view(cleandata)
 # Handle Missing DAta
 
 
+df <- data.frame(bamudb)
+
+duplicates <- df[duplicated(df$NAME.OF.THE.APPLICANT),]
+
+duplicates <- bamudb[duplicated(bamudb),]
+
+View(duplicates)
+
+
+
+
 
 
 
