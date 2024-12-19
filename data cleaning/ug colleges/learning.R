@@ -110,7 +110,7 @@ view(cleandata)
 
 df <- data.frame(bamudb)
 
-duplicates <- df[duplicated(df$NAME.OF.THE.APPLICANT),]
+duplicates <- df[duplicated(df$PROGRAMME.NAME),]
 
 duplicates <- bamudb[duplicated(bamudb),]
 
@@ -118,6 +118,17 @@ View(duplicates)
 
 
 
+colnum <- [which(bamudb$NAME.OF.THE.APPLICANT),]
+
+
+# Find the column number for "Age"
+
+column_number <- which(colnames(bamudb) == "NAME.OF.THE.APPLICANT")
+
+column_number
+
+
+View(head(bamudb))
 
 
 
