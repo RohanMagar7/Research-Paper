@@ -1,13 +1,16 @@
 expanded_path <- path.expand('-')
 
+# import the libraries ---------------------------------------------------------
 library(tidyverse)
 library(data.table)
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
 library(readr)
+library(ggplot2)
 
 
+# import the libraries ---------------------------------------------------------
 expanded_path
 
 
@@ -17,13 +20,13 @@ demo(graphics)
 
 
 
-# getting working directory
+# getting working directory ----------------------------------------------
 wkdir <- getwd()
 
 
 
 # setting working directory
-# setwd('F:/R programming/data cleaning/ug colleges')
+setwd('F:/R programming/data cleaning/ug colleges')
 
 
 getwd()
@@ -46,7 +49,7 @@ dir(pattern = 'create')
 # creating a file
 file.create('learning.R')
 
-library(ggplot2)
+# getting working directory ----------------------------------------------
 
 
 ggplot(data=diamonds,aes(x=price))+
@@ -92,6 +95,7 @@ view(clean)
 view(clean$data)
 
 
+#=================================================================
 
 # remove duplicates 
 duplicate <- bamudb$PROGRAMME.NAME
@@ -104,6 +108,7 @@ view(cleandata)
 
 # Experiment with growing variables to identify duplicates in specific columns 
 
+#=================================================================
 
 # Handle Missing DAta
 
@@ -116,9 +121,8 @@ duplicates <- bamudb[duplicated(bamudb),]
 
 View(duplicates)
 
+#=================================================================
 
-
-colnum <- [which(bamudb$NAME.OF.THE.APPLICANT),]
 
 
 # Find the column number for "Age"
@@ -143,29 +147,40 @@ colnames(bamudb)
 
 
 
-# Name to search
+# N======================= SEarch Name from a table =====================
 partial_name <- "pranav"
-
-
 result <- bamudb[grepl(partial_name, data$NAME.OF.THE.APPLICANT, ignore.case = TRUE), ]
-
 result
-
-
 View(result)
 
+# N======================= SEarch Name from a table =====================
+
+#................ get the missing cOlumns and missing counts 
+
+sum(is.na(bamudb))        # Total missing values
+colSums(is.na(bamudb))    # Missing values per column
+View(length(colSums(is.na(bamudb))))
+
+
+# N===================================== =====================
+
+
+
+
+
+
+
+# N===================================== =====================
+# N===================================== =====================
+# N===================================== =====================
+# N===================================== =====================
+# N===================================== =====================
 
 
 ### 
 
 
-sum(is.na(bamudb))        # Total missing values
 
-
-colSums(is.na(bamudb))    # Missing values per column
-
-
-View(length(colSums(is.na(bamudb))))
 
 
 
