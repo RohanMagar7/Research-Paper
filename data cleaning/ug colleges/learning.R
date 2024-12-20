@@ -23,7 +23,7 @@ wkdir <- getwd()
 
 
 # setting working directory
-#setwd('F:/R programming/data cleaning/ug colleges')
+# setwd('F:/R programming/data cleaning/ug colleges')
 
 
 getwd()
@@ -132,7 +132,27 @@ View(head(bamudb))
 
 
 
+# View basic structure
+dim(bamudb) # Check dimensions (rows and columns)
+str(bamudb) # View structure of the dataset
 
+
+
+
+colnames(bamudb)
+
+
+
+# Name to search
+partial_name <- "anande"
+
+
+result <- bamudb[grepl(partial_name, data$NAME.OF.THE.APPLICANT, ignore.case = TRUE), ]
+
+result
+
+
+View(result)
 
 
 
