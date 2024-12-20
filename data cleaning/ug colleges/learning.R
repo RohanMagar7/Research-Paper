@@ -162,21 +162,33 @@ colSums(is.na(bamudb))    # Missing values per column
 View(length(colSums(is.na(bamudb))))
 
 
-# N===================================== =====================
-# ----------- remove those columns where all the values are NA
+# N===================================== =================================
+# ----------- remove those columns where all the values are NA ----------------
 
 # Remove columns where all values are NA
-data_cleaned <- data[, colSums(!is.na(data)) > 0]
+View(colSums(is.na(bamudb)))
+
+data_cleaned <- bamudb[, colSums(!is.na(bamudb)) == 18736]
 
 # Print the result
 print(data_cleaned)
+View(data_cleaned)
+summary(data_cleaned)
+View(summary(data_cleaned))
+nrow(data_cleaned)
 
-
-
-
-
+ncol(data_cleaned)
+### NOW CAN SEE THE THERE ARE ONLY 152 COLS ARE THER REMOVED UNWANTED REST OF THE COLUMNS 
+# ............. EARLIER WE HAD 815 COLUMNS 
 
 # N===================================== =====================
+
+
+
+
+
+
+
 # N===================================== =====================
 # N===================================== =====================
 # N===================================== =====================
