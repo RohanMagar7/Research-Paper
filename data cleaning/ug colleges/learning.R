@@ -176,8 +176,8 @@ View(data_cleaned)
 summary(data_cleaned)
 View(summary(data_cleaned))
 nrow(data_cleaned)
-
 ncol(data_cleaned)
+
 ### NOW CAN SEE THE THERE ARE ONLY 152 COLS ARE THER REMOVED UNWANTED REST OF THE COLUMNS 
 # ............. EARLIER WE HAD 815 COLUMNS 
 
