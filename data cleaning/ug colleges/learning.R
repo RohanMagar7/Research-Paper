@@ -163,7 +163,13 @@ View(length(colSums(is.na(bamudb))))
 
 
 # N===================================== =====================
+# ----------- remove those columns where all the values are NA
 
+# Remove columns where all values are NA
+data_cleaned <- data[, colSums(!is.na(data)) > 0]
+
+# Print the result
+print(data_cleaned)
 
 
 
