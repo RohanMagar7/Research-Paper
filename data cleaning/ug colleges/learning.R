@@ -144,7 +144,7 @@ colnames(bamudb)
 
 
 # Name to search
-partial_name <- "anande"
+partial_name <- "pranav"
 
 
 result <- bamudb[grepl(partial_name, data$NAME.OF.THE.APPLICANT, ignore.case = TRUE), ]
@@ -153,6 +153,22 @@ result
 
 
 View(result)
+
+
+
+### 
+
+
+sum(is.na(bamudb))        # Total missing values
+
+
+colSums(is.na(bamudb))    # Missing values per column
+
+
+View(length(colSums(is.na(bamudb))))
+
+
+
 
 
 
