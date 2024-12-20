@@ -185,8 +185,18 @@ ncol(data_cleaned)
 
 
 
+vari <- aggregate(Scores ~ Gender, data = bamudb, FUN = mean)
 
 
+table(bamudb$GENDER)
+
+
+programmes <- table(bamudb$PROGRAMME.NAME)
+View(table(bamudb$PROGRAMME.NAME))
+
+programmes <- data.frame(programmes)
+
+View(arrange(desc(programmes)))
 
 
 # N===================================== =====================
