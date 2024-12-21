@@ -1,6 +1,8 @@
 expanded_path <- path.expand('-')
+install.packages('mice')
 
 # import the libraries ---------------------------------------------------------
+library(mice)
 library(tidyverse)
 library(data.table)
 library(tidyverse)
@@ -200,6 +202,18 @@ View(arrange(desc(programmes)))
 
 
 # N===================================== =====================
+
+# ------------ working with mice package -----------------------
+
+
+imputed_data <- mice(bamudb, method = "doct")
+
+### learn it later
+#!!!!!!!!!!!!!!!!!!!! Understand imputation models (predictive mean matching, logistic regression).!!!
+
+
+
+
 # N===================================== =====================
 # N===================================== =====================
 # N===================================== =====================
