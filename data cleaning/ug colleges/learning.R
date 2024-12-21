@@ -287,6 +287,10 @@ sapply(1:5, function(x) x^2)
 
 
 
+# learn all the laply,sapply and other methdos 
+
+
+
 
 
 
