@@ -241,3 +241,14 @@ print(mean_even)
 
 
 
+#1.	Create a list that stores a person’s name, age, and favorite colors (as a vector).
+
+person <- list(
+  name = 'johan',
+  age = 23,
+  favorateColor = c('red','blue','green','yellow','black')
+)
+person
+
+person$favorateColor
+
