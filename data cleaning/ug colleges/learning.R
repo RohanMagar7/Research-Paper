@@ -222,9 +222,21 @@ imputed_data <- mice(bamudb, method = "doct")
 ### 
 
 
+# 1.	Create a vector of the first 10 even numbers.
+
+even_numbers <- seq(2, 20, by = 2)
+print(even_numbers)
+      
 
 
 
+#2.	Find the sum and mean of these numbers.
+
+sum_even <- sum(even_numbers)
+mean_even <- mean(even_numbers)
+
+print(sum_even)
+print(mean_even)
 
 
 
