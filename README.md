@@ -23,7 +23,8 @@ Thank you for providing us with the resources, knowledge, and motivation to push
 7. **`data_visualization/`**: Visualizations created in R using libraries like `ggplot2`.  
 8. **`methods/`**: Methods and algorithms implemented during the analysis.  
 9. **`notes/`**: Detailed theoretical notes, explanations, and learning material.  
-10. **`research_methodology/`**: Documentation and application of research methods in data analysis.  
+10. **`research_methodology/`**: Documentation and application of research methods in data analysis.
+11. **`books and other study material`**: added a few study materials and books
 
 *Additional folders may be added as I progress and explore further topics.*  
 
