@@ -252,3 +252,41 @@ person
 
 person$favorateColor
 
+
+
+
+
+
+Sys.time()
+
+Sys.Date()
+
+Sys.getenv()
+view(Sys.getenv())
+
+
+sys.call()
+
+sys.frames()
+
+sys.function()
+Sys.chmod()
+
+Sys.info()
+sys.parent()
+
+
+
+squared <- function(x) x^2
+squared(5)  # Output: 25
+
+squared(10)
+
+# Using an anonymous function directly
+sapply(1:5, function(x) x^2)
+
+
+
+
+
+
