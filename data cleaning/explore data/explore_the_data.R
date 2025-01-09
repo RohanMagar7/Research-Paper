@@ -57,6 +57,22 @@ length(unique(data$PROGRAMME.NAME))
 
 
 
+# create table of programmes names with their counts 
+view(sort(table(data$PROGRAMME.NAME),decreasing = TRUE))
+
+
+# convert as dataframe
+programmeTable <- as.data.frame(sort(table(data$PROGRAMME.NAME),decreasing = TRUE))
+
+
+# change the column names 
+colnames(programmeTable) <- c('programme Name', 'enrolled students')
+
+
+
+view(programmeTable)
+
+
 
 
 # data type
