@@ -98,6 +98,17 @@ class(data$GENDER)
 
 
 
+programmeTable <- as.vector(programmeTable)
+
+view(programmeTable)
+
+programmeTable %>% 
+  select(PROGRAMME.NAMES) %>%
+  count(PROGRAMME.NAMES) %>%
+  arrange(desc(n)) %>%
+  view()
+  
+  
 
 
 
