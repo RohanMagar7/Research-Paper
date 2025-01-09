@@ -85,13 +85,13 @@ topten <- sort(table(data$PROGRAMME.NAME),decreasing = TRUE)
 topten <- topten[1:10]
 
 
-
 barplot(sort(table(data$PROGRAMME.NAME),decreasing = TRUE))
 
 view(topten)
 
 # plotting top 10 programmes 
 barplot(topten)
+
 
 # data type
 class(data$GENDER)
@@ -109,15 +109,49 @@ programmeTable %>%
   view()
   
   
+###############################################
+  
+is.na(programmeTable$`enrolled students`)
+
+na.omit(programmeTable$`enrolled students`)
+
+
+
+
+class(programmeTable$`enrolled students`)
+
+length(programmeTable$`enrolled students`)
+
+summary(programmeTable$`enrolled students`)
+
+# average every programm 112 students are enroled
+
+# max studet is 975 to biochemistry 
+
+
+
+
 
 
 
 
 
 ###############################################
+
+
+
+
+
 ###############################################
+
+
+
+
 ###############################################
-###############################################
+
+
+
+
 ###############################################
 
 
