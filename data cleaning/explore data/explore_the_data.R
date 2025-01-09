@@ -70,10 +70,28 @@ colnames(programmeTable) <- c('programme Name', 'enrolled students')
 
 
 
+
 view(programmeTable)
 
 
 
+barplot(sort(table(data$PROGRAMME.NAME),decreasing = TRUE))
+
+
+# arranging the data descending 
+topten <- sort(table(data$PROGRAMME.NAME),decreasing = TRUE)
+
+# getting top 10 programmes
+topten <- topten[1:10]
+
+
+
+barplot(sort(table(data$PROGRAMME.NAME),decreasing = TRUE))
+
+view(topten)
+
+# plotting top 10 programmes 
+barplot(topten)
 
 # data type
 class(data$GENDER)
