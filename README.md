@@ -6,7 +6,7 @@ Welcome to our **Data Science Learning Repository**! This repository captures ou
 
 ## 🙏 Special Thanks
 
-We would like to take a moment to sincerely thank **Dr Bharti W Gawali**, whose guidance, support, and encouragement have made this learning journey possible. Their dedication to helping students grow and develop their skills in data science has been invaluable. This repository is a result of their passion for teaching and commitment to our success.  
+We would like to take a moment to sincerely thank **[Dr Bharti W Gawali](https://bamu.irins.org/profile/57209)** and **[Dr Pravin Yannawar](https://bamu.irins.org/profile/245933)**, whose guidance, support, and encouragement have made this learning journey possible. Their dedication to helping students grow and develop their skills in data science has been invaluable. This repository is a result of their passion for teaching and commitment to our success.  
 
 Thank you for providing us with the resources, knowledge, and motivation to push our boundaries and learn effectively. This repository is a testament to your excellent teaching!
 
