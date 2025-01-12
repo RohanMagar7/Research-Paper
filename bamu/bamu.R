@@ -143,18 +143,35 @@ ggplot(programme, aes(x = `programme Name`, y = `Enrolled Students `)) +
 
 install.packages("randomForest")
 
+#------------------------ Random Forest analysis ___________________
 library(randomForest)
 
 
-rf_model <- randomForest(PROGRAMME.NAMES ~ XII.PERCENTAGE + UG.PASSING.YEAR,
+require_data <- as.data.frame(required_details)
+
+is.na(require_data$FAMILY.INCOME)
+
+rf_model <- randomForest(PROGRAMME.NAME ~ XII.PERCENTAGE + 
                            DOB.YEAR + 
                          GENDER + 
                            CATEGORY +
-                           MARITAL.STATUS +
                            FAMILY.INCOME ,
                          data = required_details, ntree = 100)
+
+test <- predictions
+
+remove(test)
+
+predictions <- predict(rf_model, newdata = test)
+
+
+confusionMatrix(predictions, test$ProgramName)
+
+rf_model <- randomForest(ProgramName ~ UG_Marks + PG_Marks + Age + Gender, data = train, ntree = 100)
 predictions <- predict(rf_model, newdata = test)
 confusionMatrix(predictions, test$ProgramName)
+
+
 
 
 
