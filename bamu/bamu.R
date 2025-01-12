@@ -32,9 +32,27 @@ required_details <- data %>%
 
 view(required_details)
 
+# ----------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------
 
-# ug qalification status 
+
+#--------------------------------- UG data analysis -------------------------------------------- 
 ug_qualification_status <- table(required_details$UG.QUALIFICATION.STATUS)
+ug_passing_year <- table(required_details$UG.PASSING.YEAR)
+barplot(ug_passing_year[1:10])
+
+view(ug_passing_year[1:10])
+view(ug_qualification_status)
+
+status <- data.frame(ug_qualification_status)
+
+status$Var1
+
+
+
+
+# bar for quick analysis
+barplot(ug_qualification_status, legend.text = status$Var1)
 
 # converting into the data frame to change dimensions and change colnames 
 ug_qualification_status <- as.data.frame(ug_qualification_status)
@@ -45,6 +63,19 @@ colnames(ug_qualification_status) <- c('status','count')
 
 view(ug_qualification_status)
 
+
+
+
+
+
+
+
+
+
+# ---------------------------------------- PG data analysis --------------------------
+
+pg_qualification_status <- table(required_details$PG.QUALIFICATION.STATUS)
+view(pg_qualification_status)
 
 
 
