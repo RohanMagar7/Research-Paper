@@ -111,6 +111,16 @@ sum(is.na(z)) > 1
 ## [1] FALSE
 
 
+#myURL <- "http://bcb.dfci.harvard.edu/˜aedin/courses/Bioconductor/Women.txt"
+
+#myURL
+#women <- read.table(myURL, sep = "\t", header = TRUE)
+
+#women
+
+
+
+
 
 
 
