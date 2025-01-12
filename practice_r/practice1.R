@@ -10,10 +10,6 @@ names(x.vec) <- letters[1:50]
 
 x.vec
 
-
-
-
-
 #a b c d 
 #1 3 5 7 
 x.vec
@@ -21,23 +17,16 @@ x.vec
 
 xMat <- cbind(x.vec, rnorm(4), rep(5, 4))
 xMat
-
 yMat <- rbind(1:3, rep(1, 3))
 yMat
-
 z.mat <- rbind(xMat, yMat)
-
 z.mat
-
-
-
 
 
 # Data frame
 x.df <- as.data.frame(xMat)
 names(x.df) <- c("ind", "random", "score")
 x.df
-
 
 
 
@@ -61,9 +50,7 @@ ChickWeight[1:2, ]
 ## 1 42 0 1 1
 ## 2 51 2 1 1
 chick.short <- ChickWeight[1:36, ]
-
 chick.short
-
 
 
 
@@ -76,8 +63,6 @@ chickOrd
 ## 1 42 0 1 1
 ## 25 43 0 3 1
 ## 14 49 2 2 1
-
-
 
 
 ## By both time and weight
@@ -104,7 +89,26 @@ print(x)
 
 
 
+#> Check to see if a vector has all, any or a certain 
+#> number of missing values. These create logical vectors
+#> which can be used to filter a matrix or data.frame 
 
+# checks whether all values are having na 
+all(is.na(z))
+## [1] FALSE
+
+
+# checks wheter any value is NA
+any(is.na(z))
+## [1] TRUE
+
+# count of NA 
+sum(is.na(z))
+## [1] 1
+
+
+sum(is.na(z)) > 1
+## [1] FALSE
 
 
 
