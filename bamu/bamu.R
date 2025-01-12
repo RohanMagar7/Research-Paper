@@ -37,11 +37,33 @@ view(required_details)
 
 
 #--------------------------------- UG data analysis -------------------------------------------- 
-ug_qualification_status <- table(required_details$UG.QUALIFICATION.STATUS)
-ug_passing_year <- table(required_details$UG.PASSING.YEAR)
-barplot(ug_passing_year[1:10])
+ug_qualification_status <- sort(table(required_details$UG.QUALIFICATION.STATUS),decreasing = TRUE)
+ug_passing_year <- sort(table(required_details$UG.PASSING.YEAR),decreasing = TRUE)
+#ug_course_name <- sort(table(required_details$UG.COURSE.NAME), decreasing = TRUE) ## decreasing order 
+
+# ug_subject_com <- sort(table(required_details$UG.SUBJECT.COMBINATION), decreasing = TRUE)
+# remove(ug_subject_com)
+
+# removing ug subject combination
+required_details$UG.SUBJECT.COMBINATION <- NULL
+required_details$PG.SUBJECT.COMBINATION <- NULL
+
+
+
+
+#view(ug_course_name[1:10])
+view(ug_subject_com)
+
+#barplot(ug[1:5])
+
+barplot(ug_passing_year)
+barplot(ug_qualification_status , legend.text = ug_qualification_status)
+
+
+
 
 view(ug_passing_year[1:10])
+
 view(ug_qualification_status)
 
 status <- data.frame(ug_qualification_status)
