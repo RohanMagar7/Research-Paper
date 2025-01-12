@@ -23,7 +23,21 @@ view(data)
 
 # first 6 rows 
 head(data)
+view(head(data))
 
+
+top <- head(data)
+
+top
+
+view(top)
+
+top_details <- top %>% 
+  select(PROGRAMME.NAME,NAME.OF.THE.APPLICANT, CATEGORY, UG.PASSING.YEAR, UG.QUALIFICATION.STATUS, UG.PERCENTAGE, UG.CGPA, UG.COURSE.NAME)
+
+
+
+view(top_details)
 # last 6 rows 
 tail(data)
 
