@@ -11,7 +11,7 @@ library(readr)
 
 
 
-
+view(data)
 
 
 ## --------------- Extracting main details (required) from the dataset using pipe operator ---------
@@ -20,12 +20,18 @@ library(readr)
 
 
 required_details <- data %>% 
-  select(NAME.OF.THE.APPLICANT,PROGRAMME.NAME, CATEGORY, UG.COURSE.NAME, UG.PASSING.YEAR
+  select(NAME.OF.THE.APPLICANT,PROGRAMME.NAME, CATEGORY,,MARITAL.STATUS,
+         GENDER, EMAIL ,FAMILY.INCOME, UG.COURSE.NAME, 
+         DOB.YEAR, AGE..AS.REFERENCED.,UG.PASSING.YEAR,
+           HOSTEL.REQUIRED  ,XII.PERCENTAGE ,XII.PASSING.YEAR
+           ,PINCODE ,PERMANENT.ADDRESS.LINE.1 ,PERMANENT.ADDRESS.LINE.2 ,
+         COUNTRY,STATE , Are.you.Citizen.of.India. ,MINORITY ,RELIGION,
+           ,PLACE.OF.BIRTH..COUNTRY. ,PLACE.OF.BIRTH..STATE., ,MOBILE,
          , UG.QUALIFICATION.STATUS,
          UG.PERCENTAGE, UG.total.attempt, UG.SUBJECT.COMBINATION,
          PG.COURSE.NAME,PG.Year.of.Passing.Appeared.Appearing.final.exam,
          , PG.QUALIFICATION.STATUS, PG.PERCENTAGE,
-         PG.total.attempt, PG.SUBJECT.COMBINATION)
+         PG.total.attempt, PG.SUBJECT.COMBINATION,)
 
 
 # view in the table format
@@ -46,7 +52,7 @@ ug_passing_year <- sort(table(required_details$UG.PASSING.YEAR),decreasing = TRU
 # ug_subject_com <- sort(table(required_details$UG.SUBJECT.COMBINATION), decreasing = TRUE)
 # remove(ug_subject_com)
 
-# removing ug subject combination
+# removing UG and PG subject combination( mix subjects were entered )
 required_details$UG.SUBJECT.COMBINATION <- NULL
 required_details$PG.SUBJECT.COMBINATION <- NULL
 
@@ -113,11 +119,74 @@ len_of_pg_pass_year <- length(pg_passing_year)
 barplot(pg_passing_year[(len_of_pg_pass_year-5):len_of_pg_pass_year])
 
 
+#----------------------------------------------------- 12th details 
+
+twelth <- sort(table(required_details$XII.PERCENTAGE), decreasing = TRUE)
+
+barplot(twelth[1:10] )
+
+summary(required_details$XII.PERCENTAGE)
+
+
+programme <- as.data.frame(sort(table(required_details$PROGRAMME.NAME), decreasing = TRUE)[1:10])
+
+
+colnames(programme) <- c('programme Name','Enrolled Students ')
+
+view(programme)
+
+ggplot(programme, aes(x = `programme Name`, y = `Enrolled Students `)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "UG Marks Distribution Across Programs")
+
+
+install.packages("randomForest")
+
+library(randomForest)
+
+
+rf_model <- randomForest(PROGRAMME.NAMES ~ XII.PERCENTAGE + UG.PASSING.YEAR,
+                           DOB.YEAR + 
+                         GENDER + 
+                           CATEGORY +
+                           MARITAL.STATUS +
+                           FAMILY.INCOME ,
+                         data = required_details, ntree = 100)
+predictions <- predict(rf_model, newdata = test)
+confusionMatrix(predictions, test$ProgramName)
 
 
 
 
 
+
+
+#==================================================================================
+
+# Predicting Scores based on Attendance and Age
+model <- lm(Scores ~ Attendance + Age, data = dataset)
+summary(model)
+
+# Making predictions
+predictions <- predict(model, newdata = test_data)
+
+
+
+
+model <- lm(XII.PERCENTAGE ~ PROGRAMME.NAME 
+            + GENDER + CATEGORY ,  data = required_details )
+
+summary(model)
+
+view(model)
+
+
+predictions <- predict(model)
+
+view(predictions)
+
+barplot(predictions)
 
 
 
