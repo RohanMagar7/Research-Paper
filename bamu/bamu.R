@@ -39,6 +39,8 @@ view(required_details)
 #--------------------------------- UG data analysis -------------------------------------------- 
 ug_qualification_status <- sort(table(required_details$UG.QUALIFICATION.STATUS),decreasing = TRUE)
 ug_passing_year <- sort(table(required_details$UG.PASSING.YEAR),decreasing = TRUE)
+
+
 #ug_course_name <- sort(table(required_details$UG.COURSE.NAME), decreasing = TRUE) ## decreasing order 
 
 # ug_subject_com <- sort(table(required_details$UG.SUBJECT.COMBINATION), decreasing = TRUE)
@@ -99,6 +101,16 @@ view(ug_qualification_status)
 pg_qualification_status <- table(required_details$PG.QUALIFICATION.STATUS)
 view(pg_qualification_status)
 
+pg_passing_year <- sort(table(required_details$PG.Year.of.Passing.Appeared.Appearing.final.exam)
+                        ,decreasing = FALSE)
+
+
+view(pg_passing_year[1:10])
+barplot(pg_passing_year[1:10])
+barplot(pg_passing_year)
+len_of_pg_pass_year <- length(pg_passing_year)
+
+barplot(pg_passing_year[(len_of_pg_pass_year-5):len_of_pg_pass_year])
 
 
 
