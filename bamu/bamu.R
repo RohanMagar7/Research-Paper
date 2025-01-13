@@ -128,43 +128,21 @@ barplot(twelth[1:10] )
 summary(required_details$XII.PERCENTAGE)
 
 any(is.na(required_details$XII.PASSING.YEAR))
-# there is no na vlaues in xii 
 
+# there is no na vlaues in xii 
 
 programme <- as.data.frame(sort(table(required_details$PROGRAMME.NAME), decreasing = TRUE)[1:10])
 
-
-colnames(programme) <- c('programme Name','Enrolled Students ')
+colnames(programme) <- c('programme Name','Enrolled Students')
 
 view(programme)
 
-ggplot(programme, aes(x = `programme Name`, y = `Enrolled Students `)) +
-  geom_boxplot() +
+# Bar plot: Count of students per program
+ggplot(programme, aes(x = `programme Name`, y = `Enrolled Students`, fill = as.factor(`Enrolled Students`))) +
+  geom_bar(stat = "identity") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  labs(title = "UG Marks Distribution Across Programs") 
-
-ggplot(programme, aes(x = `programme Name`, y = `Enrolled Students `, fill = `programme Name`)) +
-  geom_boxplot() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  labs(title = "UG Marks Distribution Across Programs" ,fill='programme Name')
-
-
-
-# Assuming your dataset is called `programme`
-# Summarize data: Count students in each program
-programme_summary <- programme %>%
-  group_by(`programme Name`) %>%
-  summarise(Count = n())
-
-# Merge the summarized counts back to the original dataset
-programme <- left_join(programme, programme_summary, by = "programme Name")
-
-# Plot with legends showing counts
-ggplot(programme, aes(x = `programme Name`, y = `Enrolled Students `, fill = factor(Count))) +
-  geom_boxplot() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  labs(title = "UG Marks Distribution Across Programs",
-       fill = "Students Count")  # Change legend title
+  labs(title = "Count of Students Across Programs",
+       x = "Program Name", y = "Number of Students", fill = "Enrolled Students")
 
 
 
@@ -179,6 +157,8 @@ library(randomForest)
 require_data <- as.data.frame(required_details)
 
 any(is.na(require_data$FAMILY.INCOME))
+
+any(is.na(require_data$DOB.YEAR))
 
 rf_model <- randomForest(PROGRAMME.NAME ~ XII.PERCENTAGE + 
                            DOB.YEAR + 
@@ -243,111 +223,10 @@ barplot(predictions)
 #=======================================================================
   
 
-any(is.na(require_data))
-
-str(require_data)
-
-colSums(is.na(require_data))
-
-
-
-dataset <- require_data
-
-any(is.na(dataset))
-
-dataset$XII.PERCENTAGE[is.na(dataset$XII.PERCENTAGE)] <- mean(dataset$XII.PERCENTAGE, na.rm = TRUE)
-
-
-any(is.na(dataset))
-
-
-#categorical columns
-
-
-
- 
-dataset$RELIGION[is.na(dataset$RELIGION)] <- "Unknown"
-
-  
-any(is.na(dataset$RELIGION)) 
-
-
-# Convert categorical variables to factors:
-dataset$GENDER <- as.factor(dataset$GENDER)
-dataset$MARITAL.STATUS <- as.factor(dataset$MARITAL.STATUS)
 
 
 
 
-# Program Preferences:
-
-ggplot(dataset, aes(x = PROGRAMME.NAME)) +
-  geom_bar(fill = "steelblue") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  labs(title = "Distribution of Program Preferences", x = "Program", y = "Count")
-
-
-
-ggplot(dataset, aes(x = UG.QUALIFICATION.STATUS, fill = PG.QUALIFICATION.STATUS)) +
-  geom_bar(position = "dodge") +
-  labs(title = "UG vs. PG Qualification Status", x = "UG Status", y = "Count")
-
-
-
-
-
-
-
-
-ggplot(dataset, aes(x = AGE..AS.REFERENCED.)) +
-  geom_histogram(bins = 20, fill = "skyblue", color = "black") +
-  labs(title = "Age Distribution of Applicants", x = "Age", y = "Frequency")
-
-
-
-
-# Correlation Between XII Marks and UG/PG Percentage
-
-cor(dataset$XII.PERCENTAGE, dataset$UG.PERCENTAGE, use = "complete.obs")
-cor(dataset$UG.PERCENTAGE, dataset$PG.PERCENTAGE, use = "complete.obs")
-
-
-
-ggplot(dataset, aes(x = XII.PERCENTAGE, y = UG.PERCENTAGE)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE, color = "red") +
-  labs(title = "XII Marks vs UG Percentage", x = "XII Percentage", y = "UG Percentage")
-
-
-
-
-
-
-# predict addmission chances 
-
-dataset$Admitted <- ifelse(dataset$PROGRAMME.NAME == "Desired Program", 1, 0)
-
-# Train-Test Split
-install.packages('caret')
-
-library(caret)
-
-print(set.seed(123))
-
-trainIndex <- createDataPartition(dataset$Admitted, p = 0.2, list = FALSE)
-
-train <- dataset[trainIndex, ]
-test <- dataset[-trainIndex, ]
-
-# Logistic Regression Model
-model <- glm(Admitted ~ XII.PERCENTAGE + UG.PERCENTAGE + FAMILY.INCOME + AGE..AS.REFERENCED., 
-             data = train, family = binomial)
-summary(model)
-
-# Evaluate
-predictions <- predict(model, newdata = test, type = "response")
-predicted_class <- ifelse(predictions > 0.5, 1, 0)
-confusionMatrix(as.factor(predicted_class), as.factor(test$Admitted))
 
 
 
@@ -358,8 +237,20 @@ confusionMatrix(as.factor(predicted_class), as.factor(test$Admitted))
 
 
 # Select relevant columns
-clustering_data <- dataset[, c("XII.PERCENTAGE", "UG.PERCENTAGE", "PG.PERCENTAGE")]
+clustering_data <- require_data[, c("XII.PERCENTAGE", "UG.PERCENTAGE", "PG.PERCENTAGE")]
 clustering_data <- scale(clustering_data)
+
+
+
+any(is.na(require_data$XII.PASSING.YEAR))
+# in xii exampe no one haivng na values 
+
+
+any(is.na(require_data$UG.PERCENTAGE))
+any(is.na(require_data$PG.PERCENTAGE))
+# but the pg and ug are having NA values first we have to tackele it 
+# otherwise it won't be working !!!!
+
 
 # K-Means
 set.seed(123)
@@ -371,6 +262,10 @@ dataset$Cluster <- kmeans_result$cluster
 # Visualize
 library(factoextra)
 fviz_cluster(kmeans_result, data = clustering_data)
+
+
+
+
 
 
 
