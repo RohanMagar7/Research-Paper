@@ -250,9 +250,73 @@ dataset$MARITAL.STATUS <- as.factor(dataset$MARITAL.STATUS)
 
 
 
+# Program Preferences:
+
+ggplot(dataset, aes(x = PROGRAMME.NAME)) +
+  geom_bar(fill = "steelblue") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Distribution of Program Preferences", x = "Program", y = "Count")
 
 
 
+ggplot(dataset, aes(x = UG.QUALIFICATION.STATUS, fill = PG.QUALIFICATION.STATUS)) +
+  geom_bar(position = "dodge") +
+  labs(title = "UG vs. PG Qualification Status", x = "UG Status", y = "Count")
+
+
+
+
+
+
+
+
+ggplot(dataset, aes(x = AGE..AS.REFERENCED.)) +
+  geom_histogram(bins = 20, fill = "skyblue", color = "black") +
+  labs(title = "Age Distribution of Applicants", x = "Age", y = "Frequency")
+
+
+
+
+# Correlation Between XII Marks and UG/PG Percentage
+
+cor(dataset$XII.PERCENTAGE, dataset$UG.PERCENTAGE, use = "complete.obs")
+cor(dataset$UG.PERCENTAGE, dataset$PG.PERCENTAGE, use = "complete.obs")
+
+
+
+ggplot(dataset, aes(x = XII.PERCENTAGE, y = UG.PERCENTAGE)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(title = "XII Marks vs UG Percentage", x = "XII Percentage", y = "UG Percentage")
+
+
+
+
+
+
+# predict addmission chances 
+
+dataset$Admitted <- ifelse(dataset$PROGRAMME.NAME == "Desired Program", 1, 0)
+
+# Train-Test Split
+install.packages('caret')
+
+library(caret)
+
+set.seed(123)
+trainIndex <- createDataPartition(dataset$Admitted, p = 0.8, list = FALSE)
+train <- dataset[trainIndex, ]
+test <- dataset[-trainIndex, ]
+
+# Logistic Regression Model
+model <- glm(Admitted ~ XII.PERCENTAGE + UG.PERCENTAGE + FAMILY.INCOME + AGE..AS.REFERENCED., 
+             data = train, family = binomial)
+summary(model)
+
+# Evaluate
+predictions <- predict(model, newdata = test, type = "response")
+predicted_class <- ifelse(predictions > 0.5, 1, 0)
+confusionMatrix(as.factor(predicted_class), as.factor(test$Admitted))
 
 
 
