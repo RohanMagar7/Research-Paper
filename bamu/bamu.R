@@ -31,7 +31,7 @@ required_details <- data %>%
          UG.PERCENTAGE, UG.total.attempt, UG.SUBJECT.COMBINATION,
          PG.COURSE.NAME,PG.Year.of.Passing.Appeared.Appearing.final.exam,
          , PG.QUALIFICATION.STATUS, PG.PERCENTAGE,
-         PG.total.attempt, PG.SUBJECT.COMBINATION,)
+         PG.total.attempt, PG.SUBJECT.COMBINATION)
 
 
 # view in the table format
@@ -149,14 +149,14 @@ library(randomForest)
 
 require_data <- as.data.frame(required_details)
 
-is.na(require_data$FAMILY.INCOME)
+any(is.na(require_data$FAMILY.INCOME))
 
 rf_model <- randomForest(PROGRAMME.NAME ~ XII.PERCENTAGE + 
                            DOB.YEAR + 
                          GENDER + 
                            CATEGORY +
                            FAMILY.INCOME ,
-                         data = required_details, ntree = 100)
+                         data = require_data, ntree = 100)
 
 test <- predictions
 
@@ -208,4 +208,56 @@ barplot(predictions)
 
 
 
+#==================================
+  
+  
+#=======================================================================
+  
 
+any(is.na(require_data))
+
+str(require_data)
+
+colSums(is.na(require_data))
+
+
+
+dataset <- require_data
+
+any(is.na(dataset))
+
+dataset$XII.PERCENTAGE[is.na(dataset$XII.PERCENTAGE)] <- mean(dataset$XII.PERCENTAGE, na.rm = TRUE)
+
+
+any(is.na(dataset))
+
+
+#categorical columns
+
+
+
+ 
+dataset$RELIGION[is.na(dataset$RELIGION)] <- "Unknown"
+
+  
+any(is.na(dataset$RELIGION)) 
+
+
+# Convert categorical variables to factors:
+dataset$GENDER <- as.factor(dataset$GENDER)
+dataset$MARITAL.STATUS <- as.factor(dataset$MARITAL.STATUS)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
