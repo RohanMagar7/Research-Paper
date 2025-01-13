@@ -72,3 +72,41 @@ ggplot(dataset, aes(x = XII.PERCENTAGE, y = UG.PERCENTAGE)) +
   labs(title = "XII Marks vs UG Percentage", x = "XII Percentage", y = "UG Percentage")
 
 
+
+
+
+
+#=========================================
+programme <- sort(table(require_data$PROGRAMME.NAME) , decreasing = TRUE)[1:10]
+
+programme <- as.data.frame((programme))
+
+colnames(programme) <- c('programmes' , 'enrolled students ')
+
+
+view(programme)
+
+
+
+ggplot(programme, aes(x = `programmes` , y = `enrolled students `, fill = as.factor(`enrolled students `))) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(title = "Count of Students Across Programs (Horizontal Bar Plot)",
+       x = "Program Name", y = "Number of Students", fill = "Students Count")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
