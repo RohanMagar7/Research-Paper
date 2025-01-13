@@ -303,8 +303,10 @@ install.packages('caret')
 
 library(caret)
 
-set.seed(123)
-trainIndex <- createDataPartition(dataset$Admitted, p = 0.8, list = FALSE)
+print(set.seed(123))
+
+trainIndex <- createDataPartition(dataset$Admitted, p = 0.2, list = FALSE)
+
 train <- dataset[trainIndex, ]
 test <- dataset[-trainIndex, ]
 
@@ -321,6 +323,25 @@ confusionMatrix(as.factor(predicted_class), as.factor(test$Admitted))
 
 
 
+
+
+#############
+
+
+# Select relevant columns
+clustering_data <- dataset[, c("XII.PERCENTAGE", "UG.PERCENTAGE", "PG.PERCENTAGE")]
+clustering_data <- scale(clustering_data)
+
+# K-Means
+set.seed(123)
+
+
+kmeans_result <- kmeans(clustering_data, centers = 3)
+dataset$Cluster <- kmeans_result$cluster
+
+# Visualize
+library(factoextra)
+fviz_cluster(kmeans_result, data = clustering_data)
 
 
 
