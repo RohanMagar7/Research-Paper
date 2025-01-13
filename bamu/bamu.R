@@ -150,6 +150,22 @@ ggplot(programme, aes(x = `programme Name`, y = `Enrolled Students `, fill = `pr
 
 
 
+# Assuming your dataset is called `programme`
+# Summarize data: Count students in each program
+programme_summary <- programme %>%
+  group_by(`programme Name`) %>%
+  summarise(Count = n())
+
+# Merge the summarized counts back to the original dataset
+programme <- left_join(programme, programme_summary, by = "programme Name")
+
+# Plot with legends showing counts
+ggplot(programme, aes(x = `programme Name`, y = `Enrolled Students `, fill = factor(Count))) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "UG Marks Distribution Across Programs",
+       fill = "Students Count")  # Change legend title
+
 
 
 
