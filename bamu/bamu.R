@@ -127,6 +127,9 @@ barplot(twelth[1:10] )
 
 summary(required_details$XII.PERCENTAGE)
 
+any(is.na(required_details$XII.PASSING.YEAR))
+# there is no na vlaues in xii 
+
 
 programme <- as.data.frame(sort(table(required_details$PROGRAMME.NAME), decreasing = TRUE)[1:10])
 
@@ -138,7 +141,17 @@ view(programme)
 ggplot(programme, aes(x = `programme Name`, y = `Enrolled Students `)) +
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  labs(title = "UG Marks Distribution Across Programs")
+  labs(title = "UG Marks Distribution Across Programs") 
+
+ggplot(programme, aes(x = `programme Name`, y = `Enrolled Students `, fill = `programme Name`)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "UG Marks Distribution Across Programs" ,fill='programme Name')
+
+
+
+
+
 
 
 install.packages("randomForest")
