@@ -1,20 +1,4 @@
-#======================================== UG not done =============================
 
-
-#importing required libraries 
-
-library(tidyverse)
-library(data.table)
-library(tidyverse)
-library(dplyr)
-library(ggplot2)
-library(readr)
-
-
-
-## --------------- Extracting main details (required) from the dataset using pipe operator ---------
-## >> TAKING ONLY THOSE DETIALS WHICH WOULD BE REQUIRED FOR THE ANALYSIS ---------------
-## programme, applicant name, category , ug and pg detials are taken from the dataset
 
 
 required_details <- data %>% 
@@ -36,6 +20,11 @@ required_details <- data %>%
 
 view(required_details)
 
+
+# view in the table format
+
+view(required_details)
+
 # ----------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------
 # data separation
@@ -48,52 +37,6 @@ any(is.na(required_details$UG.PERCENTAGE))
 
 not_ug_done <- required_details %>%
   filter(is.na(UG.PERCENTAGE))
-
-count_of_below_UG <- nrow(not_ug_done)
-
-summary(not_ug_done)
-
-
-
-
-
-
-
-
-
-#========================== converting to the data frame 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
