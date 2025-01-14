@@ -1,4 +1,4 @@
-#======================================== UG not done =============================
+#========================== UG or BELOW PG(DIPLOMA, VOCATIONAL COURSE ETC) ===================
 
 
 #importing required libraries 
@@ -13,7 +13,7 @@ library(readr)
 
 
 ## --------------- Extracting main details (required) from the dataset using pipe operator ---------
-## >> TAKING ONLY THOSE DETIALS WHICH WOULD BE REQUIRED FOR THE ANALYSIS ---------------
+## >> TOOK ONLY THOSE DETIALS WHICH WOULD BE REQUIRED FOR THE ANALYSIS ---------------
 ## programme, applicant name, category , ug and pg detials are taken from the dataset
 
 
@@ -81,7 +81,32 @@ barplot(sort(table(below_ug_stud$PROGRAMME.NAME), decreasing = TRUE)[1:10] )
 
 
 
-#========================== converting to the data frame 
+#========================== UG APPEARING STUDENTS ============================
+
+
+any(!is.na(below_ug_stud$UG.PERCENTAGE))
+any(is.na(below_ug_stud$UG.PERCENTAGE))
+sum(is.na(below_ug_stud$UG.PERCENTAGE)) # 2 
+
+view(below_ug_stud)
+
+
+sum(!is.na(below_ug_stud$UG.PERCENTAGE)) # 2 
+
+# there are two ✌  who are appearing
+
+done_ug <- below_ug_stud %>%
+  filter(!is.na(below_ug_stud$UG.PERCENTAGE))
+
+
+# these two ✌ studes are below  
+view(done_ug)  # ## KOMAL NAMDEO ADHANE , TANGDE SAURABH RAJU
+
+
+
+#================================================================================
+
+
 
 
 

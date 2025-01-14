@@ -31,10 +31,6 @@ view(required_details)
 # ----------------------------------------------------------------------------------------------
 # data separation
 
-any(is.na(required_details$PG.PERCENTAGE))
-
-
-sum(is.na(required_details$PG.PERCENTAGE))
 
 
 
@@ -44,23 +40,62 @@ sum(is.na(required_details$PG.PERCENTAGE))
 ##*********** who applied for PG OR other Ocational training programme or diploma ***************
 
 phd <- required_details %>%
-  select(PROGRAMME.NAME , starts_with('DOCTOR OF PHILOSOPHY'))
+  filter(startsWith(PROGRAMME.NAME ,'DOCTOR OF PHILOSOPHY'))
 
 view(phd)
 
 count_of_above_pg <- nrow(phd)
 
+count_of_above_pg
+
+nrow(phd)
+
+
+# total are @@@@ 18736
 
 print(nrow(below_ug_stud) + nrow(pg_stud) + count_of_above_pg)
 
+# sum of these belowPG  + PG  + above PG ( PHD ) = 18736 
 
-nrow(data)
 
-#ug_done_student <- required_details %>%
-#  filter(UG.QUALIFICATION.STATUS == c('APPEARING','PASSED') & !PG.QUALIFICATION.STATUS == c('APPEARING','PASSED'))
 
-#view(ug_done_student)
-#nrow(ug_done_student)
+# UG or below pg studends are @@@@@@@@@@@@@ 536
+nrow(below_ug_stud)
+
+
+# PG studes are  @@@@@@ 4075
+nrow(pg_stud)
+
+
+# PHD studes are @@@@@@@  14125
+nrow(phd)
+
+
+
+# ****************************** NOW WE HAVE SEPARATED DATA AS QUALIFICATION LEVELS ************
+
+
+any(is.na(phd$PG.PERCENTAGE))
+
+
+sum(is.na(phd$PG.PERCENTAGE))
+
+
+# there is no NA values available in the PHD DATAset 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
