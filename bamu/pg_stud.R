@@ -29,16 +29,61 @@ view(required_details)
 # ----------------------------------------------------------------------------------------------
 # data separation
 
-any(is.na(required_details$UG.PERCENTAGE))
+##******************************* who applied for PG OR other ********************************
 
-any(is.na(required_details$UG.PERCENTAGE))
 
-##*********** who applied for UG OR other Ocational training programme or diploma ***************
+pg_stud <- required_details %>%
+  filter(!startsWith(PROGRAMME.NAME,'DOCTOR OF PHILOSOPHY')) %>%
+  filter(!startsWith(PROGRAMME.NAME, 'BACHELOR') ) %>%
+  filter(!startsWith(PROGRAMME.NAME,'ADVANCE DIPLOMA ')) %>%
+  filter(!startsWith(PROGRAMME.NAME, 'DIPLOMA')) %>%
+  filter(!startsWith(PROGRAMME.NAME, 'CERTIFICATE')) %>%
+  filter(!startsWith(PROGRAMME.NAME,'PG CERTIFICATE '))
+  
+# filter(startsWith(PROGRAMME.NAME,'PG CERTIFICATE')) %>%
+# filter(startsWith(PROGRAMME.NAME,'M. VOC.'))
 
-not_ug_done <- required_details %>%
+
+  
+#!!!!!!!!!!!!!!!!! PG CERTIFICATE courses are not full time PG programme 
+# !!!!!!!!!!!!!! there is no UG Details  that's why PG CERTIFICAT'S are excluded from the pg dataset
+  
+  
+  
+  
+pg_not_having_ug <- pg_stud %>%
   filter(is.na(UG.PERCENTAGE))
 
 
+
+view(pg_not_having_ug)
+
+
+any(is.na(pg_stud$UG.PERCENTAGE))
+
+sum(is.na(pg_stud$UG.PERCENTAGE))
+
+
+
+
+view(pg_stud)
+
+view(table(pg_stud$PROGRAMME.NAME))
+
+
+
+nrow(pg_stud)
+
+view(not_pg_done)
+
+count_of_ug_done_students <- nrow(not_pg_done)
+
+
+#ug_done_student <- required_details %>%
+#  filter(UG.QUALIFICATION.STATUS == c('APPEARING','PASSED') & !PG.QUALIFICATION.STATUS == c('APPEARING','PASSED'))
+
+#view(ug_done_student)
+#nrow(ug_done_student)
 
 
 

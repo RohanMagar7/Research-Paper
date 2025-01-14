@@ -40,6 +40,7 @@ view(required_details)
 # ----------------------------------------------------------------------------------------------
 # data separation
 
+##********************* who applied for PG OR other ***************************** ***************
 # ********************** TAKING OUT THE BELOW PG STUDENTS ******************
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  ( baCHLORS , DIPLOMA , VOCATIONAL TRANING  )
 
@@ -48,10 +49,14 @@ below_ug_stud <- required_details %>%
   filter(!startsWith(PROGRAMME.NAME, 'MASTER OF ') ) %>%
   filter(!startsWith(PROGRAMME.NAME,'DOCTOR OF PHILOSOPHY')) %>%
   filter(!startsWith(PROGRAMME.NAME,'POST GRADUATE')) %>%
-  filter(!startsWith(PROGRAMME.NAME,'PG CERTIFICATE')) %>%
   filter(!startsWith(PROGRAMME.NAME,'M. VOC.'))
 
 
+#!!!!!!!!!!!!!!!!!!!!!!   NOTE 🗒!!!!! PG CERTIFICATE's are included in the UG 
+# !!!!!!************ B'cause there is not UG details available that may produce FALSE results 
+
+
+# filter(!startsWith(PROGRAMME.NAME,'PG CERTIFICATE')) %>%
 
 nrow(below_ug_stud)
 
