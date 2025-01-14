@@ -9,6 +9,7 @@ library(tidyverse)
 library(dplyr)
 library(ggplot2)
 library(readr)
+library(stringr)
 
 
 
@@ -100,6 +101,75 @@ sum(is.na(phd$PG.PERCENTAGE))
 
 
 
+#*************************************************************************************
+
+
+
+# Extract years, months, and days from the AGE..AS.REFERENCED.
+required_details <- required_details %>%
+  mutate(
+    Years = as.numeric(str_extract(AGE..AS.REFERENCED., "\\d+(?= YEARS)")),
+    Months = as.numeric(str_extract(AGE..AS.REFERENCED., "\\d+(?= MONTHS)")),
+    Days = as.numeric(str_extract(AGE..AS.REFERENCED., "\\d+(?= DAYS)"))
+  )
+
+
+# Extract years, months, and days from the AGE..AS.REFERENCED. from the PHD ***************
+phd <- phd %>%
+  mutate(
+    Years = as.numeric(str_extract(AGE..AS.REFERENCED., "\\d+(?= YEARS)")),
+    Months = as.numeric(str_extract(AGE..AS.REFERENCED., "\\d+(?= MONTHS)")),
+    Days = as.numeric(str_extract(AGE..AS.REFERENCED., "\\d+(?= DAYS)"))
+  )
+
+
+# Extract years, months, and days from the AGE..AS.REFERENCED. from the UG ***************
+below_ug_stud <- below_ug_stud %>%
+  mutate(
+    Years = as.numeric(str_extract(AGE..AS.REFERENCED., "\\d+(?= YEARS)")),
+    Months = as.numeric(str_extract(AGE..AS.REFERENCED., "\\d+(?= MONTHS)")),
+    Days = as.numeric(str_extract(AGE..AS.REFERENCED., "\\d+(?= DAYS)"))
+  )
+
+
+# Extract years, months, and days from the AGE..AS.REFERENCED. from the PG ***************
+pg_stud <- pg_stud %>%
+  mutate(
+    Years = as.numeric(str_extract(AGE..AS.REFERENCED., "\\d+(?= YEARS)")),
+    Months = as.numeric(str_extract(AGE..AS.REFERENCED., "\\d+(?= MONTHS)")),
+    Days = as.numeric(str_extract(AGE..AS.REFERENCED., "\\d+(?= DAYS)"))
+  )
+
+
+
+phd <- phd %>%
+  mutate(Age_in_Years = Years + (Months / 12) + (Days / 365.25))
+
+
+pg_stud <- pg_stud %>%
+  mutate(Age_in_Years = Years + (Months / 12) + (Days / 365.25))
+
+below_ug_stud <- below_ug_stud %>%
+  mutate(Age_in_Years = Years + (Months / 12) + (Days / 365.25))
+
+
+required_details <- required_details %>%
+  mutate(Age_in_Years = Years + (Months / 12) + (Days / 365.25))
+
+
+# checking the na values 
+sum(is.na(required_details$Age_in_Years))  # Count missing values
+
+#if neccessary 
+# required_details$Age_in_Years[is.na(required_details$Age_in_Years)] <- mean(required_details$Age_in_Years, na.rm = TRUE)
+
+
+# density plot of ages of UG , PG and PHD students 
+ggplot() +
+  geom_density(data = below_ug_stud, aes(x = Years, fill = "UG"), alpha = 0.5) +
+  geom_density(data = pg_stud, aes(x = Years, fill = "PG"), alpha = 0.5) +
+  geom_density(data = phd, aes(x = Years, fill = "PhD"), alpha = 0.5) +
+  labs(title = "Age Distribution Across Education Levels", x = "Age (Years)", fill = "Education Level")
 
 
 
@@ -108,6 +178,7 @@ sum(is.na(phd$PG.PERCENTAGE))
 
 
 
+#****************************************************************************************
 
 
 
