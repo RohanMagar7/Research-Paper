@@ -97,7 +97,7 @@ ggplot(dataset, aes(x = XII.PERCENTAGE, y = UG.PERCENTAGE)) +
 
 
 #=========================================
-programme <- sort(table(require_data$PROGRAMME.NAME) , decreasing = TRUE)[1:10]
+programme <- sort(table(required_details$PROGRAMME.NAME) , decreasing = TRUE)[1:10]
 
 programme <- as.data.frame((programme))
 

@@ -127,9 +127,23 @@ barplot(twelth[1:10] )
 
 summary(required_details$XII.PERCENTAGE)
 
+view(required_details$XII.PERCENTAGE)
+
+
+
+
+xii_outof_student <- required_details %>% 
+  filter( XII.PERCENTAGE ==100 ) %>%
+  select(NAME.OF.THE.APPLICANT, MOBILE, PROGRAMME.NAME)
+# SUNIL SHRIHARI KHARE   9370013953   MASTER OF ARTS (ARCHAEOLOGY)
+
+
+#select(NAME.OF.THE.APPLICANT)
+
+
 any(is.na(required_details$XII.PASSING.YEAR))
 
-# there is no na vlaues in xii 
+# there is no Na vlaues in xii 
 
 programme <- as.data.frame(sort(table(required_details$PROGRAMME.NAME), decreasing = TRUE)[1:10])
 
