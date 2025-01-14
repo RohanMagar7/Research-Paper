@@ -1,3 +1,20 @@
+#========================== UG or BELOW PG(DIPLOMA, VOCATIONAL COURSE ETC) ===================
+
+
+#importing required libraries 
+
+library(tidyverse)
+library(data.table)
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(readr)
+
+
+
+## --------------- Extracting main details (required) from the dataset using pipe operator ---------
+## >> TOOK ONLY THOSE DETIALS WHICH WOULD BE REQUIRED FOR THE ANALYSIS ---------------
+## programme, applicant name, category , ug and pg detials are taken from the dataset
 
 
 
@@ -29,18 +46,15 @@ view(required_details)
 
 # ----------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------
-# data separation
+#****************************** who applied for PHD *****************************
 
 
 
-
-
-
-
-##*********** who applied for PG OR other Ocational training programme or diploma ***************
-
+# data separation ( took only PHD )
 phd <- required_details %>%
   filter(startsWith(PROGRAMME.NAME ,'DOCTOR OF PHILOSOPHY'))
+
+
 
 view(phd)
 
@@ -51,24 +65,22 @@ count_of_above_pg
 nrow(phd)
 
 
-# total are @@@@ 18736
 
+#*********************************************************************************
+# total are @@@@ 18736
 print(nrow(below_ug_stud) + nrow(pg_stud) + count_of_above_pg)
 
 # sum of these belowPG  + PG  + above PG ( PHD ) = 18736 
 
-
-
 # UG or below pg studends are @@@@@@@@@@@@@ 536
 nrow(below_ug_stud)
-
 
 # PG studes are  @@@@@@ 4075
 nrow(pg_stud)
 
-
 # PHD studes are @@@@@@@  14125
 nrow(phd)
+#*********************************************************************************
 
 
 
@@ -80,8 +92,8 @@ any(is.na(phd$PG.PERCENTAGE))
 
 sum(is.na(phd$PG.PERCENTAGE))
 
-
 # there is no NA values available in the PHD DATAset 
+
 
 
 

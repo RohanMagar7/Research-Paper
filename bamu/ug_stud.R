@@ -105,6 +105,63 @@ view(done_ug)  # ## KOMAL NAMDEO ADHANE , TANGDE SAURABH RAJU
 
 
 #================================================================================
+#******************************** PROGRAM DISTRIBUTION *******************************
+
+
+ug_programmes <- sort(table(below_ug_stud$PROGRAMME.NAME), decreasing = TRUE)
+
+view(ug_programmes)
+
+
+
+# ** top 5 Programmes of below PG Level 
+
+view(ug_programmes[1:5])
+
+# CERTIFICATE OF PROFICIENCY (COP) (GERMAN)     69
+# BACHELOR OF VOCATION (INDUSTRIAL AUTOMATION)  46
+# BACHELOR OF VOCATION(AUTOMOBILE)              39
+# PG CERTIFICATE COURSE IN WOMAN STUDIES        39
+# DIPLOMA IN TAXATION LAW                       37
+
+
+barplot(ug_programmes[1:5])
+
+
+
+# ** Bottom 5 programmes 
+
+view(ug_programmes[(nrow(ug_programmes)-5): (nrow(ug_programmes))]) 
+
+# ADVANCE DIPLOMA (CHINESE)                 1
+# CERTIFICATE IN AMBEDKAR TOURISM           1
+# CERTIFICATE(PALI AND BUDDHISM)            1 
+# DIPLOMA (CHINESE)                         1
+# DIPLOMA (GERMAN)                          1
+# DIPLOMA(FRUIT AND VEGETABLE PROCESSING)   1
+
+
+
+
+#*************************************** GENDEr distribution ************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

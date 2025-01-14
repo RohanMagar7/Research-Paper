@@ -1,3 +1,20 @@
+#========================== UG or BELOW PG(DIPLOMA, VOCATIONAL COURSE ETC) ===================
+
+
+#importing required libraries 
+
+library(tidyverse)
+library(data.table)
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(readr)
+
+
+
+## --------------- Extracting main details (required) from the dataset using pipe operator ---------
+## >> TOOK ONLY THOSE DETIALS WHICH WOULD BE REQUIRED FOR THE ANALYSIS ---------------
+## programme, applicant name, category , ug and pg detials are taken from the dataset
 
 
 
@@ -27,11 +44,11 @@ view(required_details)
 
 # ----------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------
+
+##******************************* who applied for PG  ********************************
+
+
 # data separation
-
-##******************************* who applied for PG OR other ********************************
-
-
 pg_stud <- required_details %>%
   filter(!startsWith(PROGRAMME.NAME,'DOCTOR OF PHILOSOPHY')) %>%
   filter(!startsWith(PROGRAMME.NAME, 'BACHELOR') ) %>%
@@ -39,6 +56,7 @@ pg_stud <- required_details %>%
   filter(!startsWith(PROGRAMME.NAME, 'DIPLOMA')) %>%
   filter(!startsWith(PROGRAMME.NAME, 'CERTIFICATE')) %>%
   filter(!startsWith(PROGRAMME.NAME,'PG CERTIFICATE')) %>%
+  filter(!startsWith(PROGRAMME.NAME,'PG '))
 
 
 
@@ -50,11 +68,8 @@ pg_stud <- required_details %>%
 # !!!!!!!!!!!!!! there is no UG Details  that's why PG CERTIFICAT'S are excluded from the pg dataset
   
   
-  
-  
 pg_not_having_ug <- pg_stud %>%
   filter(is.na(UG.PERCENTAGE))
-
 
 
 view(pg_not_having_ug)
@@ -64,27 +79,28 @@ any(is.na(pg_stud$UG.PERCENTAGE))
 
 sum(is.na(pg_stud$UG.PERCENTAGE))
 
-
+## now every PG student having their PG percentages 
 
 
 view(pg_stud)
 
 view(table(pg_stud$PROGRAMME.NAME))
 
+nrow(pg_stud) #### 4075
+
+count_of_ug_done_students <- nrow(not_pg_done) ### 4075
 
 
-nrow(pg_stud)
-
-view(not_pg_done)
-
-count_of_ug_done_students <- nrow(not_pg_done)
+# ****************************** NOW WE HAVE SEPARATED DATA AS QUALIFICATION LEVELS ************
 
 
-#ug_done_student <- required_details %>%
-#  filter(UG.QUALIFICATION.STATUS == c('APPEARING','PASSED') & !PG.QUALIFICATION.STATUS == c('APPEARING','PASSED'))
+any(is.na(phd$UG.PERCENTAGE))
 
-#view(ug_done_student)
-#nrow(ug_done_student)
+
+sum(is.na(phd$UG.PERCENTAGE))
+
+# there is no NA values available in the PG DATAset 
 
 
 
+#*******************************************************************************************
