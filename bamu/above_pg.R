@@ -181,6 +181,18 @@ ggplot() +
 #****************************************************************************************
 
 
+# predictive moding 
+
+length(phd$PG.QUALIFICATION.STATUS)
+
+length
+
+
+model <- glm(PG.QUALIFICATION.STATUS ~ PG.PERCENTAGE + FAMILY.INCOME + AGE..AS.REFERENCED., 
+             data = phd, family = "binomial")
+summary(model)
+
+
 
 
 
