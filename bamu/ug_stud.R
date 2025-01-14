@@ -160,10 +160,7 @@ ggplot(ug_programmes, aes(x = `programmes` , y = `enrolled students `,
        x = "Program Name", y = "Number of Students", fill = "Students Count")
 
 
-
-
 #*************************************** GENDEr distribution ************************
-
 
 ug_gender <- sort(table(below_ug_stud$GENDER), decreasing = TRUE)
 
@@ -172,25 +169,17 @@ view(ug_gender)
 # MALE    356
 # FEMALE  180
 
+ug_gender <- as.data.frame(ug_gender)
+
+colnames(ug_gender) <- c('gender' , 'enrolled students')
 
 
-
-# top 10 
-ug_programmes <- as.data.frame(ug_programmes[1:10])
-
-# bottom 10 
-#ug_programmes <- as.data.frame(ug_programmes[(nrow(ug_programmes)-10): (nrow(ug_programmes))])
-
-
-colnames(ug_programmes) <- c('programmes' , 'enrolled students ')
-
-
-ggplot(ug_programmes, aes(x = `programmes` , y = `enrolled students `, 
-                          fill = as.factor(`enrolled students `))) +
+ggplot(ug_gender, aes(x = `gender` , y = `enrolled students`, 
+                          fill = as.factor(`enrolled students`))) +
   geom_bar(stat = "identity") +
   coord_flip() +
-  labs(title = "Count of Students Across Programs (Horizontal Bar Plot)",
-       x = "Program Name", y = "Number of Students", fill = "Students Count")
+  labs(title = "Count of Students Genderwise (Horizontal Bar Plot)",
+       x = "Gener", y = "Number of Students", fill = "Students Count")
 
 
 
