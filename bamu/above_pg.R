@@ -180,12 +180,15 @@ ggplot() +
 
 #****************************************************************************************
 
-
 # predictive moding 
 
 length(phd$PG.QUALIFICATION.STATUS)
 
-length
+view(table(phd$PG.QUALIFICATION.STATUS))
+# it has binary state   PASSED AND APPEARING 
+
+phd$PG.QUALIFICATION.STATUS <- ifelse(phd$PG.QUALIFICATION.STATUS == "PASSED", 1, 0)
+
 
 
 model <- glm(PG.QUALIFICATION.STATUS ~ PG.PERCENTAGE + FAMILY.INCOME + AGE..AS.REFERENCED., 
