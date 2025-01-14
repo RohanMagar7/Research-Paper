@@ -46,7 +46,7 @@ view(required_details)
 
 
 below_ug_stud <- required_details %>%
-  filter(!startsWith(PROGRAMME.NAME, 'MASTER OF ') ) %>%
+  filter(!startsWith(PROGRAMME.NAME, 'MASTER OF') ) %>%
   filter(!startsWith(PROGRAMME.NAME,'DOCTOR OF PHILOSOPHY')) %>%
   filter(!startsWith(PROGRAMME.NAME,'POST GRADUATE')) %>%
   filter(!startsWith(PROGRAMME.NAME,'M. VOC.'))
@@ -57,6 +57,18 @@ below_ug_stud <- required_details %>%
 
 
 # filter(!startsWith(PROGRAMME.NAME,'PG CERTIFICATE')) %>%
+
+
+any(!is.na(below_ug_stud$UG.PERCENTAGE))
+
+sum(!is.na(below_ug_stud$UG.PERCENTAGE))
+
+
+having_ug_details <- below_ug_stud %>%
+  filter(!is.na(below_ug_stud$UG.PERCENTAGE))
+
+
+view(having_ug_details)
 
 nrow(below_ug_stud)
 

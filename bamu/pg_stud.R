@@ -38,9 +38,10 @@ pg_stud <- required_details %>%
   filter(!startsWith(PROGRAMME.NAME,'ADVANCE DIPLOMA ')) %>%
   filter(!startsWith(PROGRAMME.NAME, 'DIPLOMA')) %>%
   filter(!startsWith(PROGRAMME.NAME, 'CERTIFICATE')) %>%
-  filter(!startsWith(PROGRAMME.NAME,'PG CERTIFICATE '))
-  
-# filter(startsWith(PROGRAMME.NAME,'PG CERTIFICATE')) %>%
+  filter(!startsWith(PROGRAMME.NAME,'PG CERTIFICATE')) %>%
+
+
+
 # filter(startsWith(PROGRAMME.NAME,'M. VOC.'))
 
 
