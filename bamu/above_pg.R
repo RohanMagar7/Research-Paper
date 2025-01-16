@@ -195,7 +195,6 @@ duplicate_by_name_and_email <- phd %>%
   filter(duplicated(NAME.OF.THE.APPLICANT) & duplicated(EMAIL))
 
 
-
 #DUPLICATE BY NAMES
 duplicate_names <- phd %>%
   filter(duplicated(NAME.OF.THE.APPLICANT)  )
@@ -206,12 +205,8 @@ duplicate_by_email <- phd %>%
   filter(duplicated(EMAIL))
 
 view(duplicate_names)
-
-
-
 view(duplicate_by_name_and_email)
 View(duplicate_by_email)
-
 
 
 
@@ -246,34 +241,10 @@ view(rbind(dup,dup2,dup3, dup4, dup5))
 
 #______________________________________________________________________
 
-view(duplicate_names)
 
-any(duplicated(duplicate_names$NAME.OF.THE.APPLICANT))
+# *************************** EXPORTING THE DUPLICATE DATASET ****** 
 
-sum(duplicated(duplicate_names$NAME.OF.THE.APPLICANT))
-
-
-
-
-
-
-
-view(sort( table( duplicate_by_email$NAME.OF.THE.APPLICANT) , decreasing = TRUE))
-
-view(sort( table( phd$NAME.OF.THE.APPLICANT) , decreasing = TRUE))
-
-
-view(not_in_duplicates)
-
-
-
-un <- unique(phd$NAME.OF.THE.APPLICANT)
-
-
-
-nrow(un)
-
-
+write.csv(duplicate_names, "C:/Users/HP/Downloads/duplicate_data.csv")
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ REMOVING DUPLICATES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -286,14 +257,9 @@ distinct_df <- phd %>%
 # ANOTHER WAY TO REMOVE DUPLICATES 
 distinct_df2 <- phd[!duplicated(phd$NAME.OF.THE.APPLICANT) , ]
 
-
 nrow(distinct_df2)
-
-
 nrow(distinct_df)
-
 any(duplicated(distinct_df$NAME.OF.THE.APPLICANT))
-
 
 
 
@@ -304,13 +270,9 @@ no_duplicate_check1 <- distinct_df %>%
 
 
 
-
 view(no_duplicate_check1)
-
 #****************************** NOW DUPLICATES ARE REMOVED ✅   ***************
 
-
-write.csv(duplicate_names, "C:/Users/HP/Downloads/duplicate_data.csv")
 
 
 
