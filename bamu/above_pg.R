@@ -74,7 +74,6 @@ nrow(pg_stud)
 nrow(phd)
 #*********************************************************************************
 
-
 # ****************************** NOW WE HAVE SEPARATED DATA AS QUALIFICATION LEVELS ************
 
 
@@ -84,7 +83,6 @@ any(is.na(phd$PG.PERCENTAGE))
 sum(is.na(phd$PG.PERCENTAGE))
 
 # there is no NA values available in the PHD DATAset 
-
 
 #*************************************************************************************
 
@@ -165,12 +163,9 @@ view(table(phd$PG.QUALIFICATION.STATUS))
 
 phd$PG.QUALIFICATION.STATUS <- ifelse(phd$PG.QUALIFICATION.STATUS == "PASSED", 1, 0)
 
-
-
 model <- glm(PG.QUALIFICATION.STATUS ~ PG.PERCENTAGE + FAMILY.INCOME + AGE..AS.REFERENCED., 
              data = phd, family = "binomial")
 summary(model)
-
 
 
 
@@ -247,11 +242,9 @@ View(sort(table(duplicate_names$NAME.OF.THE.APPLICANT), decreasing = TRUE))
 
 #______________________________________________________________________
 
-
 # *************************** EXPORTING THE DUPLICATE DATASET ****** 
 
 write.csv(duplicate_names, "C:/Users/HP/Downloads/duplicate_data.csv")
-
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ REMOVING DUPLICATES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
@@ -295,16 +288,11 @@ university_type <- as.data.frame(university_type)
 colnames(university_type) <- c('University','Count')
 
 
-
 ggplot(university_type, aes(x = `University` , y = `Count`, fill = as.factor(`Count`))) +
   geom_bar(stat = "identity") +
   coord_flip() +
   labs(title = "University Type Home or Other (Horizontal Bar Plot)",
        x = "University", y = "Number of Students", fill = "Count")
-
-
-
-
 
 
 
@@ -317,7 +305,12 @@ ggplot(university_type, aes(x = `University` , y = `Count`, fill = as.factor(`Co
 
 
 
+write.csv(distinct_df,'C:/Users/HP/Downloads/filtered_phd_data.csv')
 
+print(nrow(distinct_df) + 240)
+
+
+nrow(phd)
 
 
 
