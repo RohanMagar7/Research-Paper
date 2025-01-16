@@ -246,6 +246,15 @@ view(rbind(dup,dup2,dup3, dup4, dup5))
 
 #______________________________________________________________________
 
+view(duplicate_names)
+
+any(duplicated(duplicate_names$NAME.OF.THE.APPLICANT))
+
+sum(duplicated(duplicate_names$NAME.OF.THE.APPLICANT))
+
+
+
+
 
 
 
