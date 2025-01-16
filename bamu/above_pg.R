@@ -1,6 +1,4 @@
 #========================== UG or BELOW PG(DIPLOMA, VOCATIONAL COURSE ETC) ===================
-
-
 #importing required libraries 
 
 library(tidyverse)
@@ -10,7 +8,6 @@ library(dplyr)
 library(ggplot2)
 library(readr)
 library(stringr)
-
 
 
 ## --------------- Extracting main details (required) from the dataset using pipe operator ---------
@@ -44,18 +41,13 @@ view(required_details)
 view(required_details)
 
 
-
 # ----------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------
 #****************************** who applied for PHD *****************************
 
-
-
 # data separation ( took only PHD )
 phd <- required_details %>%
   filter(startsWith(PROGRAMME.NAME ,'DOCTOR OF PHILOSOPHY'))
-
-
 
 view(phd)
 
@@ -64,7 +56,6 @@ count_of_above_pg <- nrow(phd)
 count_of_above_pg
 
 nrow(phd)
-
 
 
 #*********************************************************************************
@@ -84,7 +75,6 @@ nrow(phd)
 #*********************************************************************************
 
 
-
 # ****************************** NOW WE HAVE SEPARATED DATA AS QUALIFICATION LEVELS ************
 
 
@@ -96,13 +86,7 @@ sum(is.na(phd$PG.PERCENTAGE))
 # there is no NA values available in the PHD DATAset 
 
 
-
-
-
-
-
 #*************************************************************************************
-
 
 
 # Extract years, months, and days from the AGE..AS.REFERENCED.
@@ -141,7 +125,6 @@ pg_stud <- pg_stud %>%
   )
 
 
-
 phd <- phd %>%
   mutate(Age_in_Years = Years + (Months / 12) + (Days / 365.25))
 
@@ -170,13 +153,6 @@ ggplot() +
   geom_density(data = pg_stud, aes(x = Years, fill = "PG"), alpha = 0.5) +
   geom_density(data = phd, aes(x = Years, fill = "PhD"), alpha = 0.5) +
   labs(title = "Age Distribution Across Education Levels", x = "Age (Years)", fill = "Education Level")
-
-
-
-
-
-
-
 
 #****************************************************************************************
 
@@ -210,9 +186,38 @@ any(duplicated(phd$NAME.OF.THE.APPLICANT))
 # 240 are duplicates 
 sum(duplicated(phd$NAME.OF.THE.APPLICANT))
 
+#*******************************
+#************************************** GETTING DUPLICATES *******************************
+
+
+#DUPLICATE BY NAME AND EMAIL
+duplicate_by_name_and_email <- phd %>%
+  filter(duplicated(NAME.OF.THE.APPLICANT) & duplicated(EMAIL))
+
+
+
+#DUPLICATE BY NAMES
+duplicate_names <- phd %>%
+  filter(duplicated(NAME.OF.THE.APPLICANT)  )
+
+
+# DUPLICATE BY EMAIL 
+duplicate_by_email <- phd %>%
+  filter(duplicated(EMAIL))
+
+view(duplicate_names)
+
+
+
+view(duplicate_by_name_and_email)
+View(duplicate_by_email)
+
+
 
 
 # ***** CROSS CHECKING WHETHER DATA IS DUPLICATE OR NOT 
+
+#!!!!!!!!!!!!! NOTE THE SAMPLE NAMES ARE TAKEN FROM THE DUPLICATE DATASET 
 
 # Random sample 1
 dup <- phd %>% 
@@ -239,36 +244,8 @@ dup5 <- phd %>%
 # confirmed that these data are duplicate 
 view(rbind(dup,dup2,dup3, dup4, dup5))
 
+#______________________________________________________________________
 
-
-
-
-
-#DUPLICATE BY NAME AND EMAIL
-duplicate_by_name_and_email <- phd %>%
-  filter(duplicated(NAME.OF.THE.APPLICANT) & duplicated(EMAIL))
-
-
-
-#DUPLICATE BY NAMES
-duplicate_names <- phd %>%
-  filter(duplicated(NAME.OF.THE.APPLICANT)  )
-
-
-# DUPLICATE BY EMAIL 
-duplicate_by_email <- phd %>%
-  filter(duplicated(EMAIL))
-
-view(duplicate_names)
-
-
-
-view(duplicate_by_name_and_email)
-View(duplicate_by_email)
-
-
-not_in_duplicates <- duplicate_by_email  %>%
-  filter(NAME.OF.THE.APPLICANT == duplicate_by_email$NAME.OF.THE.APPLICANT)
 
 
 
@@ -304,13 +281,7 @@ distinct_df2 <- phd[!duplicated(phd$NAME.OF.THE.APPLICANT) , ]
 nrow(distinct_df2)
 
 
-
-
-
 nrow(distinct_df)
-
-
-
 
 any(duplicated(distinct_df$NAME.OF.THE.APPLICANT))
 
