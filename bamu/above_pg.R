@@ -241,6 +241,10 @@ dup5 <- phd %>%
 # confirmed that these data are duplicate 
 view(rbind(dup,dup2,dup3, dup4, dup5))
 
+
+View(sort(table(duplicate_names$NAME.OF.THE.APPLICANT), decreasing = TRUE))
+
+
 #______________________________________________________________________
 
 
