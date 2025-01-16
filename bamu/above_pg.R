@@ -199,6 +199,106 @@ summary(model)
 
 
 
+#*******************************************************************************************
+#*********************************** CHECK DUPLICATES **************************************
+
+
+# TRUe there are a few duplicates by the names
+any(duplicated(phd$NAME.OF.THE.APPLICANT))
+
+ 
+# 240 are duplicates 
+sum(duplicated(phd$NAME.OF.THE.APPLICANT))
+
+
+
+# ***** CROSS CHECKING WHETHER DATA IS DUPLICATE OR NOT 
+
+# Random sample 1
+dup <- phd %>% 
+  filter(NAME.OF.THE.APPLICANT == 'KORDE PRAVIN RAMESHWAR' && )
+
+
+# Random sample 2
+dup2 <- phd %>% 
+  filter(NAME.OF.THE.APPLICANT == 'MANYAR AYAJAHMED MAHAMADHANIF')
+
+# Random sample 3
+dup3 <- phd %>% 
+  filter(NAME.OF.THE.APPLICANT == 'ANMOD SHUBHANGI JAIKUMAR')
+
+# Random sample 4
+dup4 <- phd %>% 
+  filter(NAME.OF.THE.APPLICANT == 'INGLE SANJAY RAMBHAU')
+
+# Random sample 5
+dup5 <- phd %>% 
+  filter(NAME.OF.THE.APPLICANT == 'AMALE PALLAVI VISHNUPANT')
+
+
+# confirmed that these data are duplicate 
+view(rbind(dup,dup2,dup3, dup4, dup5))
+
+
+
+
+
+
+#
+duplicate_by_name_and_email <- phd %>%
+  filter(duplicated(NAME.OF.THE.APPLICANT) & duplicated(EMAIL))
+
+duplicate_names <- phd %>%
+  filter(duplicated(NAME.OF.THE.APPLICANT)  )
+
+duplicate_by_email <- phd %>%
+  filter(duplicated(EMAIL))
+
+
+view(duplicate_names)
+
+
+
+write.csv(duplicate_names, "C:/Users/HP/Downloads/duplicate_data.csv")
+
+
+
+
+
+
+
+
+
+#*************************************************************************************
+
+
+
+
+view(phd)
+
+
+view(sort(table(phd$PG.UNIVERISTY.NAME), decreasing = TRUE))
+
+
+university_type <- sort(table(phd$PG.UNIVERISTY.NAME), decreasing = TRUE)
+
+
+university_type <- as.data.frame(university_type)
+
+colnames(university_type) <- c('University','Count')
+
+
+
+
+
+
+
+ggplot(university_type, aes(x = `University` , y = `Count`, fill = as.factor(`Count`))) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(title = "University Type Home or Other (Horizontal Bar Plot)",
+       x = "University", y = "Number of Students", fill = "Count")
+
 
 
 
