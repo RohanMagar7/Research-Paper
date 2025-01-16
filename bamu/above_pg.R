@@ -244,19 +244,78 @@ view(rbind(dup,dup2,dup3, dup4, dup5))
 
 
 
-#
+#DUPLICATE BY NAME AND EMAIL
 duplicate_by_name_and_email <- phd %>%
   filter(duplicated(NAME.OF.THE.APPLICANT) & duplicated(EMAIL))
 
+
+
+#DUPLICATE BY NAMES
 duplicate_names <- phd %>%
   filter(duplicated(NAME.OF.THE.APPLICANT)  )
 
+
+# DUPLICATE BY EMAIL 
 duplicate_by_email <- phd %>%
   filter(duplicated(EMAIL))
 
-
 view(duplicate_names)
 
+
+
+view(duplicate_by_name_and_email)
+View(duplicate_by_email)
+
+
+not_in_duplicates <- duplicate_by_email  %>%
+  filter(NAME.OF.THE.APPLICANT == duplicate_by_email$NAME.OF.THE.APPLICANT)
+
+
+
+view(sort( table( duplicate_by_email$NAME.OF.THE.APPLICANT) , decreasing = TRUE))
+
+view(sort( table( phd$NAME.OF.THE.APPLICANT) , decreasing = TRUE))
+
+
+view(not_in_duplicates)
+
+
+
+un <- unique(phd$NAME.OF.THE.APPLICANT)
+
+
+
+nrow(un)
+
+
+
+distinct_df <- phd %>%
+  distinct(NAME.OF.THE.APPLICANT, .keep_all = TRUE)
+
+
+
+
+nrow(distinct_df)
+
+
+
+
+any(duplicated(distinct_df$NAME.OF.THE.APPLICANT))
+
+
+
+
+# CHEKCING NOT DUPLICATE
+
+no_duplicate_check1 <- distinct_df %>% 
+  filter(NAME.OF.THE.APPLICANT == 'MANYAR AYAJAHMED MAHAMADHANIF')
+
+
+
+
+view(no_duplicate_check1)
+
+#****************************** NOW DUPLICATES ARE REMOVED ✅   ***************
 
 
 write.csv(duplicate_names, "C:/Users/HP/Downloads/duplicate_data.csv")
