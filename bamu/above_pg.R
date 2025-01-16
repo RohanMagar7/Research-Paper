@@ -289,8 +289,20 @@ nrow(un)
 
 
 
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ REMOVING DUPLICATES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+# FIRST WAY TO REMOVE 
 distinct_df <- phd %>%
   distinct(NAME.OF.THE.APPLICANT, .keep_all = TRUE)
+
+
+# ANOTHER WAY TO REMOVE DUPLICATES 
+distinct_df2 <- phd[!duplicated(phd$NAME.OF.THE.APPLICANT) , ]
+
+
+nrow(distinct_df2)
+
 
 
 
