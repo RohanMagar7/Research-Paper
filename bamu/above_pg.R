@@ -315,28 +315,48 @@ ggplot(university_type, aes(x = `University` , y = `Count`, fill = as.factor(`Co
 
 
 
+# districts 
+districts <- sort(table(phd$DISTRICT) , decreasing = TRUE)[1:20]
 
 
-
-view(sort(table(phd$DISTRICT) , decreasing = TRUE))
-
-districts <- sort(table(phd$DISTRICT) , decreasing = TRUE)
-
-
+# states 
 states <- sort(table(phd$STATE), decreasing = TRUE)
 
 
 
-country <- sort(table(phd$COUNTRY), decreasing = TRUE)
+
+view(states)
+view(districts)
 
 
-
-
+#!!!!!!  students are came from 110 Districts 
 nrow(districts)
+nrow(states)
+
+
+
 
 barplot(districts)
 barplot(states)
-barplot(country)
+
+
+
+districts <- as.data.frame(districts)
+
+colnames(districts) <- c('District','Count')
+
+
+view(districts)
+
+
+
+#!!!!!!!!!!!!!!!!!!!!!  95 STUDENTS HAVE NO DISTRICT NAMES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+ggplot(districts, aes(x = `District` , y = `Count`, fill = as.factor(`Count`))) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(title = "DISTRICT WISE STUDENT COUNT ( TOP 20 DISTRICTS )",
+       x = "District", y = "Number of Students", fill = "Count")
 
 
 
