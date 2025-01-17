@@ -249,6 +249,14 @@ View(sort(table(duplicate_names$NAME.OF.THE.APPLICANT), decreasing = TRUE))
 
 write.csv(duplicate_names, "C:/Users/HP/Downloads/duplicate_data.csv")
 
+
+write.csv(distinct_df,'C:/Users/HP/Downloads/filtered_phd_data.csv')
+
+print(nrow(distinct_df) + 240)
+
+
+nrow(phd)
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ REMOVING DUPLICATES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
 # FIRST WAY TO REMOVE 
@@ -308,17 +316,27 @@ ggplot(university_type, aes(x = `University` , y = `Count`, fill = as.factor(`Co
 
 
 
-write.csv(distinct_df,'C:/Users/HP/Downloads/filtered_phd_data.csv')
-
-print(nrow(distinct_df) + 240)
 
 
-nrow(phd)
+view(sort(table(phd$DISTRICT) , decreasing = TRUE))
+
+districts <- sort(table(phd$DISTRICT) , decreasing = TRUE)
+
+
+states <- sort(table(phd$STATE), decreasing = TRUE)
+
+
+
+country <- sort(table(phd$COUNTRY), decreasing = TRUE)
 
 
 
 
+nrow(districts)
 
+barplot(districts)
+barplot(states)
+barplot(country)
 
 
 
