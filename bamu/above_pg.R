@@ -433,7 +433,25 @@ phd$StandardizedName <- sapply(phd$CleanedName, match_name, reference_list = sta
 
 
 
-view(phd)
+view(phd$StandardizedName)
+
+
+
+
+# Automate with Machine Learning (Optional)
+# If fuzzy matching alone doesn’t yield satisfactory 
+# results (e.g., too many unique names), you can train a machine 
+# learning model to classify names into standardized categories.
+
+# Prepare Training Data:
+  
+# Create a labeled dataset where CleanedName is mapped to StandardizedName.
+# Train a Model: Use a text classification algorithm like Naive Bayes, Random Forest, or XGBoost.
+
+
+
+
+
 
 
 
