@@ -451,6 +451,33 @@ view(phd$StandardizedName)
 
 
 
+# import library 
+library(caret)
+
+# Example: Random Forest
+train_index <- createDataPartition(standard_university_names, p = 0.8, list = FALSE)
+train_data <- university_data[train_index]
+test_data <- university_data[-train_index]
+
+
+# data fram 
+train_data <- as.data.frame(train_data)
+
+
+
+
+
+rf_model <- train(
+  standard_university_names ~ CleanedName,
+  data = phd,
+  method = "rf",
+  trControl = trainControl(method = "cv", number = 5)
+)
+
+# Predict on full dataset
+df$PredictedName <- predict(rf_model, newdata = df)
+
+
 
 
 
