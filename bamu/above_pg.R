@@ -419,6 +419,30 @@ library(stringdist)
 
 
 
+# perform fuzzy matching 
+
+# Function for fuzzy matching
+match_name <- function(name, reference_list) {
+  distances <- stringdist(name, reference_list, method = "jw")  # Jaro-Winkler distance
+  match_index <- which.min(distances)
+  return(reference_list[match_index])
+}
+
+# Apply fuzzy matching
+phd$StandardizedName <- sapply(phd$CleanedName, match_name, reference_list = standard_university_names)
+
+
+
+view(phd)
+
+
+
+
+
+
+
+
+
 
 
 
