@@ -215,8 +215,8 @@ View(duplicate_by_email)
 #!!!!!!!!!!!!! NOTE THE SAMPLE NAMES ARE TAKEN FROM THE DUPLICATE DATASET 
 
 # Random sample 1
-dup <- phd %>% 
-  filter(NAME.OF.THE.APPLICANT == 'KORDE PRAVIN RAMESHWAR' && )
+#dup <- phd %>% 
+#  filter(NAME.OF.THE.APPLICANT == 'KORDE PRAVIN RAMESHWAR' && )
 
 
 # Random sample 2
@@ -357,6 +357,11 @@ ggplot(districts, aes(x = `District` , y = `Count`, fill = as.factor(`Count`))) 
   coord_flip() +
   labs(title = "DISTRICT WISE STUDENT COUNT ( TOP 20 DISTRICTS )",
        x = "District", y = "Number of Students", fill = "Count")
+
+
+#********************** 
+
+
 
 
 
