@@ -362,6 +362,60 @@ ggplot(districts, aes(x = `District` , y = `Count`, fill = as.factor(`Count`))) 
 #********************** 
 
 
+university_data <- read.csv("C:/Users/HP/Downloads/univer.csv")
+
+view(university_data)
+
+
+university_names <- university_data$Name.of.the.University
+
+
+length(university_names)
+
+view(university_names)
+
+
+### clean names 
+
+library(stringr)
+
+# created a preprocess function 
+# 1 > converts into lowercase 
+# 2 > removing periods  
+# 3 > replace multiple spaces  
+# 4 > trim leading traning space
+
+preprocess <- function(name) {
+  name <- tolower(name)                   # Convert to lowercase
+  name <- str_replace_all(name, "\\.", "") # Remove periods
+  name <- str_replace_all(name, "\\s+", " ") # Replace multiple spaces
+  name <- str_trim(name)                  # Trim leading/trailing spaces
+  return(name)
+}
+
+# Apply preprocessing
+phd$CleanedName <- preprocess(phd$PG.UNIVERSITY.NAME..OTHER.)
+
+
+
+view(phd$CleanedName)
+
+
+
+
+### standard reference list 
+standard_university_names <- table(university_names)
+
+
+
+
+
+## match using fuzzy matching 
+## ** Use fuzzy matching to map inconsistent names to the closest match in the reference list.
+# install.packages("stringdist")
+
+library(stringdist)
+
 
 
 
