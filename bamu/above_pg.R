@@ -58,6 +58,7 @@ count_of_above_pg <- nrow(phd)
 
 count_of_above_pg
 
+
 nrow(phd)
 
 
@@ -455,9 +456,32 @@ view(phd$StandardizedName)
 library(caret)
 
 # Example: Random Forest
-train_index <- createDataPartition(standard_university_names, p = 0.8, list = FALSE)
+
+head(university_names)
+
+university_data <- as.factor(university_data$Name.of.the.University)
+
+class(university_data)
+
+
+
+train_index <- createDataPartition(university_data, p = 0.8, list = FALSE)
+
+
+
+view(university_data$Name.of.the.University)
+
+
 train_data <- university_data[train_index]
 test_data <- university_data[-train_index]
+
+train_index
+train_data
+test_data
+
+
+view(train_index)
+view(train_data)
 
 
 # data fram 
