@@ -119,7 +119,7 @@ below_ug_stud <- below_ug_stud %>%
 
 
 # Extract years, months, and days from the AGE..AS.REFERENCED. from the PG ***************
-pg_stud <- pg_stud %>%
+ pg_stud <- pg_stud %>%
   mutate(
     Years = as.numeric(str_extract(AGE..AS.REFERENCED., "\\d+(?= YEARS)")),
     Months = as.numeric(str_extract(AGE..AS.REFERENCED., "\\d+(?= MONTHS)")),
@@ -163,6 +163,7 @@ ggplot() +
 length(phd$PG.QUALIFICATION.STATUS)
 
 view(table(phd$PG.QUALIFICATION.STATUS))
+
 # it has binary state   PASSED AND APPEARING 
 
 phd$PG.QUALIFICATION.STATUS <- ifelse(phd$PG.QUALIFICATION.STATUS == "PASSED", 1, 0)
@@ -459,13 +460,17 @@ library(caret)
 
 head(university_names)
 
-university_data <- as.factor(university_data$Name.of.the.University)
+# university_data <- as.factor(university_data$Name.of.the.University)
 
 class(university_data)
 
+class(university_data$Name.of.the.University)
+
+university_data$Name.of.the.University <- as.factor(university_data$Name.of.the.University)
+class(university_data$Name.of.the.University)
 
 
-train_index <- createDataPartition(university_data, p = 0.8, list = FALSE)
+train_index <- createDataPartition(university_data$Name.of.the.University, p = 0.8, list = FALSE)
 
 
 
