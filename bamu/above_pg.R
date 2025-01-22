@@ -470,6 +470,53 @@ university_data$Name.of.the.University <- as.factor(university_data$Name.of.the.
 class(university_data$Name.of.the.University)
 
 
+#### ********************* GROUPING UISNG ML 
+
+unique_names <- unique(phd$PG.UNIVERSITY.NAME..OTHER.)
+
+
+install.packages('text2vec')
+
+library(text2vec)
+
+
+
+# Preprocess names
+phd$CleanedName <- tolower(phd$PG.UNIVERSITY.NAME..OTHER.)
+phd$CleanedName <- gsub("[^a-z ]", "", phd$PG.UNIVERSITY.NAME..OTHER.)  # Remove punctuation
+
+
+
+
+# Create TF-IDF matrix
+it <- itoken(phd$CleanedName, progressbar = TRUE)
+
+
+vocab <- create_vocabulary(it)
+
+
+dtm <- create_dtm(it, vocab_vectorizer(vocab))
+
+
+nrow(dtm)
+
+nrow(unique(as.matrix(dtm)))
+
+
+# Apply clustering (K-Means)
+set.seed(123)
+kmeans_model <- kmeans(dtm, centers = 2)  # Adjust centers as needed
+
+phd$Cluster <- kmeans_model$cluster
+
+
+
+
+dtm <- unique(as.vector(dtm))
+
+
+
+
 train_index <- createDataPartition(university_data$Name.of.the.University, p = 0.8, list = FALSE)
 
 
