@@ -314,42 +314,26 @@ ggplot(university_type, aes(x = `University` , y = `Count`, fill = as.factor(`Co
 #********************************************************************************************
 #********************************************************************************************
 
-
-
-
 # districts 
 districts <- sort(table(phd$DISTRICT) , decreasing = TRUE)[1:20]
-
 
 # states 
 states <- sort(table(phd$STATE), decreasing = TRUE)
 
-
-
-
 view(states)
 view(districts)
-
 
 #!!!!!!  students are came from 110 Districts 
 nrow(districts)
 nrow(states)
 
-
-
-
 barplot(districts)
 barplot(states)
 
-
-
 districts <- as.data.frame(districts)
-
 colnames(districts) <- c('District','Count')
 
-
 view(districts)
-
 
 
 #!!!!!!!!!!!!!!!!!!!!!  95 STUDENTS HAVE NO DISTRICT NAMES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -361,8 +345,7 @@ ggplot(districts, aes(x = `District` , y = `Count`, fill = as.factor(`Count`))) 
        x = "District", y = "Number of Students", fill = "Count")
 
 
-#********************** 
-
+#**********************************************************************
 
 university_data <- read.csv("C:/Users/HP/Downloads/univer.csv")
 
