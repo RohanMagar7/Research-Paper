@@ -380,12 +380,12 @@ preprocess <- function(name) {
 
 phd_gender <- as.data.frame(sort(table(phd$GENDER),decreasing = TRUE))
 
-colnames(phd_gender) <- c('gender','count')
+colnames(phd_gender) <- c('Gender','Count')
 
 view(phd_gender)
 
 
-ggplot( phd_gender, aes(x=`gender`,y=`count` , fill = as.factor(`count`))) +
+ggplot( phd_gender, aes(x=`Gender`,y=`Count` , fill = as.factor(`Count`))) +
           geom_bar(stat = 'identity') +
           labs(title = "Gender Distribution",
                x = "Gender", y = "Count", fill = "Count")
@@ -395,6 +395,112 @@ ggplot( phd_gender, aes(x=`gender`,y=`count` , fill = as.factor(`count`))) +
 
 
 
+#### PACKAGES TO INTERACTIVE VISUALIZATION
+#install.packages("ggplot2")
+install.packages("ggimage")
+#install.packages("plotly")
+
+
+
+
+
+
+
+# Add image URLs or file paths for icons
+phd_gender$Image <- c(
+  "C:/Users/HP/Downloads/trans.png",
+  "https://cdn-icons-png.flaticon.com/512/432/432559.png",
+  "https://cdn-icons-png.flaticon.com/512/432/432561.png"
+  
+)
+
+
+
+
+library(ggplot2)
+library(ggimage)
+library(plotly)
+
+# Create the base plot with ggplot2
+gender_plot <- ggplot(phd_gender, aes(x = Gender, y = Count)) +
+  geom_bar(stat = "identity", aes(fill = Gender), show.legend = FALSE, width = 0.6) + 
+  geom_image(aes(image = Image), size = 0.1, by = "width") +  # Add icons
+  scale_fill_manual(values = c("Male" = "blue", "Female" = "pink")) +
+  labs(title = "Gender Distribution", x = NULL, y = "Count") +
+  theme_minimal() +
+  theme(
+    text = element_text(size = 14),
+    plot.title = element_text(hjust = 0.5),
+    axis.title.x = element_blank(),
+    axis.text.x = element_text(face = "bold", size = 14),
+    axis.text.y = element_text(size = 12)
+  )
+
+# Make the plot interactive with Plotly
+interactive_plot <- ggplotly(gender_plot)
+
+# Display the interactive plot
+interactive_plot
+
+
+
+
+
+
+# Static plot with icons using ggplot2
+gender_plot <- ggplot(phd_gender, aes(x = Gender, y = Count)) +
+  geom_bar(stat = "identity", aes(fill = Gender), show.legend = FALSE, width = 0.6) +
+  geom_image(aes(image = Image), size = 0.1, by = "width") +
+  scale_fill_manual(values = c("Male" = "blue", "Female" = "pink")) +
+  labs(title = "Gender Distribution", x = NULL, y = "Count") +
+  theme_minimal() +
+  theme(
+    text = element_text(size = 14),
+    plot.title = element_text(hjust = 0.5),
+    axis.title.x = element_blank(),
+    axis.text.x = element_text(face = "bold", size = 14),
+    axis.text.y = element_text(size = 12)
+  )
+
+# Display the static plot
+print(gender_plot)
+
+
+library(plotly)
+
+# Create the interactive bar chart with plotly
+interactive_plot <- plot_ly(
+  data = phd_gender,
+  x = ~Gender,
+  y = ~Count,
+  type = "bar",
+  text = ~paste0("Count: ", Count),
+  hoverinfo = "text",
+  marker = list(color = c("blue", "pink"), 
+                line = list(color = "black", width = 1.5))
+) %>%
+  layout(
+    title = "Gender Distribution",
+    xaxis = list(title = ""),
+    yaxis = list(title = "Count"),
+    images = list(
+      list(
+        source = "https://cdn-icons-png.flaticon.com/512/432/432559.png", # Male icon
+        xref = "x", yref = "y",
+        x = "Male", y = 12000, # Position for the male icon
+        sizex = 0.5, sizey = 3000, xanchor = "center", yanchor = "bottom"
+      ),
+      list(
+        source = "https://cdn-icons-png.flaticon.com/512/432/432561.png", # Female icon
+        xref = "x", yref = "y",
+        x = "Female", y = 8000, # Position for the female icon
+        sizex = 0.5, sizey = 3000, xanchor = "center", yanchor = "bottom"
+      )
+    )
+  )
+
+# Display the interactive plot
+interactive_plot
 
 
 
@@ -410,10 +516,67 @@ ggplot( phd_gender, aes(x=`gender`,y=`count` , fill = as.factor(`count`))) +
 
 
 
+phd <- distinct_df
+
+
+
+#
+
+
+nrow(phd)
+
+
+#*************************************************************** 
+
+
+
+# Load necessary libraries
+library(dplyr)
+library(tidyr)
+
+# Check the structure of the dataset
+str(phd)
+
+# Ensure the relevant columns exist
+# Columns we need: PROGRAMME.NAME and GENDER
+if (!("PROGRAMME.NAME" %in% colnames(phd) && "GENDER" %in% colnames(phd))) {
+  stop("Required columns (PROGRAMME.NAME and GENDER) are missing in the dataset.")
+}
+
+
+view(sort(table(phd$PROGRAMME.NAME)))
+
+
+
+
+
+
+
+# Create the gender distribution table
+gender_distribution <- phd %>%
+  group_by(PROGRAMME.NAME, GENDER) %>%
+  summarise(Count = n(), .groups = "drop") %>%
+  arrange(PROGRAMME.NAME)
+
+# View the result
+print(gender_distribution)
+
+
+view(gender_distribution)
+
+
+
+gender_distribution_wide <- gender_distribution %>%
+  pivot_wider(names_from = GENDER, values_from = Count, values_fill = 0)
+
+# View the wide-format table
+
+view(gender_distribution_wide)
+
 
 
   
-    
+write.csv(gender_distribution_wide, "C:/Users/HP/Downloads/all_programme_gender.csv")
   
   
 

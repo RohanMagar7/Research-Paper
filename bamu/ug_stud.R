@@ -29,7 +29,10 @@ required_details <- data %>%
          UG.PERCENTAGE, UG.total.attempt, UG.SUBJECT.COMBINATION,
          PG.COURSE.NAME,PG.Year.of.Passing.Appeared.Appearing.final.exam,
          , PG.QUALIFICATION.STATUS, PG.PERCENTAGE,
-         PG.total.attempt, PG.SUBJECT.COMBINATION)
+         PG.total.attempt, PG.SUBJECT.COMBINATION,
+         PG.UNIVERISTY.NAME, SU.COLLEGE.DEPARTMENT.NAME
+         
+         )
 
 
 # view in the table format

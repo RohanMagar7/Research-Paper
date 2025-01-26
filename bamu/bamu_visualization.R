@@ -86,7 +86,7 @@ cor(dataset$UG.PERCENTAGE, dataset$PG.PERCENTAGE, use = "complete.obs")
 
 
 
-ggplot(dataset, aes(x = XII.PERCENTAGE, y = UG.PERCENTAGE)) +
+ggplot(data, aes(x = XII.PERCENTAGE, y = UG.PERCENTAGE)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE, color = "red") +
   labs(title = "XII Marks vs UG Percentage", x = "XII Percentage", y = "UG Percentage")
