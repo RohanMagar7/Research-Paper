@@ -575,8 +575,48 @@ view(gender_distribution_wide)
 
 
 
+library(dplyr)
+
+# Arrange the gender_distribution table in descending order by Count
+gender_distribution_desc <- gender_distribution %>%
+  arrange(desc(Count))
+
+# View the result
+view(gender_distribution_desc)
+
+
+
+
+library(dplyr)
+
+# Arrange the gender_distribution table in descending order by Count
+gender_distribution_desc <- gender_distribution %>%
+  arrange(desc(Count))
+
+# View the result
+view(gender_distribution_desc)
+
+
+# Add a Total column for sorting
+gender_distribution_wide <- gender_distribution_wide %>%
+  mutate(Total = MALE + FEMALE + TRANSGENDER) %>%
+  arrange(desc(Total))
+
+
+
+# View the result
+view(gender_distribution_wide)
+
+
+
+
   
 write.csv(gender_distribution_wide, "C:/Users/HP/Downloads/all_programme_gender.csv")
+
+
+
+
+
   
   
 
