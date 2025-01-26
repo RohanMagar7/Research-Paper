@@ -526,30 +526,23 @@ phd <- distinct_df
 nrow(phd)
 
 
-#*************************************************************** 
+#********************************************************************************************
+#*********** GET THE DATA GENDERWISE ( GENDER DISTRIBUTION ) IN EACH PROGRAMME **************
+#********************************************************************************************
 
 
+view(sort(table(phd$PROGRAMME.NAME)))
 
-# Load necessary libraries
-library(dplyr)
-library(tidyr)
 
 # Check the structure of the dataset
 str(phd)
 
 # Ensure the relevant columns exist
 # Columns we need: PROGRAMME.NAME and GENDER
+
 if (!("PROGRAMME.NAME" %in% colnames(phd) && "GENDER" %in% colnames(phd))) {
   stop("Required columns (PROGRAMME.NAME and GENDER) are missing in the dataset.")
 }
-
-
-view(sort(table(phd$PROGRAMME.NAME)))
-
-
-
-
-
 
 
 # Create the gender distribution table
@@ -559,23 +552,15 @@ gender_distribution <- phd %>%
   arrange(PROGRAMME.NAME)
 
 # View the result
-print(gender_distribution)
-
-
 view(gender_distribution)
-
 
 
 gender_distribution_wide <- gender_distribution %>%
   pivot_wider(names_from = GENDER, values_from = Count, values_fill = 0)
 
 # View the wide-format table
-
 view(gender_distribution_wide)
 
-
-
-library(dplyr)
 
 # Arrange the gender_distribution table in descending order by Count
 gender_distribution_desc <- gender_distribution %>%
@@ -585,13 +570,11 @@ gender_distribution_desc <- gender_distribution %>%
 view(gender_distribution_desc)
 
 
-
-
-library(dplyr)
-
 # Arrange the gender_distribution table in descending order by Count
 gender_distribution_desc <- gender_distribution %>%
   arrange(desc(Count))
+
+
 
 # View the result
 view(gender_distribution_desc)
@@ -602,15 +585,12 @@ gender_distribution_wide <- gender_distribution_wide %>%
   mutate(Total = MALE + FEMALE + TRANSGENDER) %>%
   arrange(desc(Total))
 
-
-
 # View the result
 view(gender_distribution_wide)
 
 
 
 
-  
 write.csv(gender_distribution_wide, "C:/Users/HP/Downloads/all_programme_gender.csv")
 
 
