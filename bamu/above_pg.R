@@ -314,8 +314,12 @@ ggplot(university_type, aes(x = `University` , y = `Count`, fill = as.factor(`Co
 #********************************************************************************************
 #********************************************************************************************
 
+
+phd <- distinct_df
+
+
 # districts 
-districts <- sort(table(phd$DISTRICT) , decreasing = TRUE)[1:20]
+districts <- sort(table(phd$DISTRICT) , decreasing = TRUE)
 
 # states 
 states <- sort(table(phd$STATE), decreasing = TRUE)
