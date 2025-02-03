@@ -597,12 +597,21 @@ view(gender_distribution_wide)
 
 write.csv(gender_distribution_wide, "C:/Users/HP/Downloads/all_programme_gender.csv")
 
-
+write.csv(districts,"C:/Users/HP/Downloads/phd_district_distribution.csv")
 
 
 
   
   
+#****************************************
+
+math <- c(2,4,5,7,9,7,10,12,22,14)
+result <- mean(math)
+print(result)
+
+
+
+#################################################
 
 
 
