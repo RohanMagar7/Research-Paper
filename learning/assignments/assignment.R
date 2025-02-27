@@ -1,3 +1,45 @@
+library(tidyverse)
+
+
+# load the downloaded dataset
+dataset <- read.csv('F:/R programming/learning/assignments/learning dataset/college.csv')
+
+
+head(dataset)
+view(dataset)
+class(dataset)
+str(dataset)
+
+
+
+
+
+
+#load required library
+library(e1071)
+
+
+#Create first matrix
+A = matrix(c(1,2,3,4,5,6),nrow = 2,ncol = 3)
+#Create second matrix
+B = matrix(c(7,8,9,10,11,12),nrow = 2, ncol = 3)
+
+sum = A + B
+sub = A - B
+mul = A * B
+div = A / B
+
+print(sum)
+print(sub)
+print(mul)
+print(div)
+
+
+
+
+
+
+
 tens <- array(1:24,dim=c(2,3,4))
 
 print(tens)
