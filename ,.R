@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 # load dataset
 iris <- iris
 # convert species factor 
@@ -19,24 +27,12 @@ plot(pl,pw,
      col = speciesId
      )
 
-
 # add legend
 legend('bottomright',
        legend = levels(iris$Species),
        pch = 1:3,
-       
-       
+       col = 1:3
        )
-
-
-
-
-
-
-
-
-
-
 # load neccessary dataset
 iris <- iris
 #extract petal length and petal width
