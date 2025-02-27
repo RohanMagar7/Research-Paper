@@ -1,6 +1,19 @@
+#Plot the given data
+iris <- iris
+
+# Plot the data
+plot(iris)
+
+# Summary of the given data
+summary(iris)
+
+# Histogram of the data
+hist(iris$Sepal.Width)
+
+
+
+
 library(tidyverse)
-
-
 # load the downloaded dataset
 dataset <- read.csv('F:/R programming/learning/assignments/learning dataset/college.csv')
 
