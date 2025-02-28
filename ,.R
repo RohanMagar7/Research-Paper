@@ -1,4 +1,24 @@
+# to display summary of the dataset
+iris <- iris
 
+summary(iris)
+
+# Calculate standar deviation
+apply(iris,1:4,sd,2)
+
+# To visualize data and plot the histogram
+par(mfrow = (2,2))
+hist(iris$Sepal.Length, col = 'blue',breaks = 20)
+hist(iris$Sepal.Width, col = 'blue',breaks = 20)
+hist(iris$Petal.Length, col = 'blue',breaks = 20)
+hist(iris$Petal.Width, col = 'blue',breaks = 20)
+
+# Plot scatter plot
+ggplot(data = iris , aes(x = Sepal.Length,y=Sepal.Width,col = iris$Species)) +
+   geom_point()
+
+       
+       
 
 
 
