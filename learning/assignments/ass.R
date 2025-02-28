@@ -1,64 +1,24 @@
-set.seed(1240352)
-iris[,1:4] <- scale(iris[,1:4])
-setosa <- rbind(iris[iris$Species == 'Setosa',])
-veriColor <- rbind(iris[iris$Species == 'versiColor',])
-verginica <- rbind(iris[iris$Species == 'Verginica',])
-ind <- sample(1: nrow(setosa),nrow(setosa) * 0.8)
-
-iris.train <- rbind(setosa[ind,],veriColor[ind,],verginica[ind,])
-iris.test <- rbind(setosa[-ind,],veriColor[-ind,], verginica[-ind,])
-iris[,1:4] <- scale(iris[,1:4])
-
-
-library(class) 
-
-error <- numeric(15)
-for (i in 1:15) {
-  knn.fit <- knn(train = iris.train[, 1:4], 
-                 test = iris.test[, 1:4], 
-                 cl = iris.train$Species, 
-                 k = i)  
-  
-  error[i] <- 1 - mean(knn.fit == iris.test$Species) 
-}
-
-
-ggplot(data = data.from(error), aes(x = 1:15, y = error))+
-  geom_line(color = 'blue')
-
-
-
-
 library(ggplot2)
-iris <- iris
+library(ggfortify)
+library(plotly)
 
-summary(iris)
+data(iris)
+iris_numeric <- iris[, 1:4]
 
-#calculate standard deviation
-apply(iris[, 1:4], 2, sd)  
+pca_result <- prcomp(iris_numeric, center = TRUE, scale. = TRUE)
 
-par(mar = c(4, 4, 2, 1))  
-par(mfrow = c(2, 2))  
+std_dev <- pca_result$sdev
+prop_variance <- (std_dev^2) / sum(std_dev^2)
+cum_variance <- cumsum(prop_variance)
 
-hist(iris$Sepal.Length, col = 'blue', breaks = 10, main = "Sepal Length")
-hist(iris$Sepal.Width, col = 'blue', breaks = 10, main = "Sepal Width")
-hist(iris$Petal.Length, col = 'blue', breaks = 10, main = "Petal Length")
-hist(iris$Petal.Width, col = 'blue', breaks = 10, main = "Petal Width")
+print(data.frame(PC = paste0("PC", 1:length(std_dev)), Std_Dev = std_dev, Prop_Var = prop_variance, Cum_Var = cum_variance))
 
-par(mfrow = c(1,1)) 
+ggplot(data.frame(PC = factor(1:4), Variance = prop_variance), aes(x = PC, y = Variance)) +
+  geom_bar(stat = "identity", fill = "blue") + ggtitle("Scree Plot") + theme_minimal()
 
+pca_df <- data.frame(pca_result$x, Species = iris$Species)
+ggplot(pca_df, aes(x = PC1, y = PC2, color = Species)) + geom_point(size = 3) + ggtitle("PCA: First Two Components") + theme_minimal()
 
-
-# plot scatter plot
-ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, col = Species)) +
-  geom_point()
-
-
-ggplot(data = iris, aes(x = Petal.Length, y = Petal.Width, col = Species)) +
-  geom_point()
-
-
-
-library(caret)
-cm <- confusionMatrix(predictors, iris$Species)
-
+plot_ly(pca_df, x = ~PC1, y = ~PC2, z = ~PC3, color = ~Species, colors = c("red", "blue", "green")) %>%
+  add_markers() %>%
+  layout(title = "3D PCA Visualization", scene = list(xaxis = list(title = "PC1"), yaxis = list(title = "PC2"), zaxis = list(title = "PC3")))
