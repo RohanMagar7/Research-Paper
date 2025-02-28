@@ -1,3 +1,73 @@
+library(MASS)
+library(ggplot2)
+
+# Use the Boston housing dataset
+data <- Boston  
+
+# Rename the target variable (house price)
+colnames(data)[14] <- "Price"
+
+set.seed(123)  
+train_indices <- sample(1:nrow(data), 0.7 * nrow(data))
+train_data <- data[train_indices, ]
+test_data <- data[-train_indices, ]
+
+# Train a linear regression model (Predicting house prices)
+model <- lm(Price ~ ., data = train_data)
+
+# Model summary
+summary(model)
+
+# Predict on test data
+predictions <- predict(model, newdata = test_data)
+
+# Evaluate model performance (Mean Squared Error)
+mse <- mean((test_data$Price - predictions)^2)
+cat("Mean Squared Error:", mse, "\n")
+
+ggplot(data.frame(Actual = test_data$Price, Predicted = predictions), aes(x = Actual, y = Predicted)) +
+  geom_point(color = "blue") +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
+  labs(title = "Actual vs Predicted House Prices", x = "Actual Price", y = "Predicted Price") +
+  theme_minimal()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 library(ggplot2)
 library(ggfortify)
 library(plotly)
