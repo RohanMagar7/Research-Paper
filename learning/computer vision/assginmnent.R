@@ -51,4 +51,98 @@ plot(pw,pl)
 
 
 
+##++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+pl <- iris$Petal.Length
+pw <- iris$Petal.Width
+Species <- as.numeric(iris$Species)
+
+View(iris)
+Species
+
+# plot petal length vs petal width
+plot(pl,pw,
+     xlab = 'petal length',
+     ylab = 'petal width',
+     main = 'petal width vs petal length',
+     pch = Species,
+     
+     )
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+# Load dataset
+data(iris)
+
+# Define colors and shapes for each species
+colors <- c("setosa" = "red", "versicolor" = "green", "virginica" = "blue")
+shapes <- c("setosa" = 16, "versicolor" = 17, "virginica" = 18)
+
+# Create scatter plot with colors and shapes
+plot(iris$Petal.Length, iris$Petal.Width,
+     col = colors[iris$Species], # Assign colors by species
+     pch = shapes[iris$Species], # Assign shapes by species
+     xlab = "Petal Length (cm)",
+     ylab = "Petal Width (cm)",
+     main = "Petal Width vs Petal Length by Species",
+     cex = 1.2) # Increase point size
+
+# Add legend
+legend(x=5,y=2,
+       legend = names(colors),
+       col = colors,
+       pch = shapes,
+       title = "Species",
+       bty = "n") # Remove border around legend
+
+###++++++++++++++++++++++++++++++++++++++++++++++
+
+
+### calculate standar deviation
+
+stamdard_deviation <- apply(iris[1:4], 2, sd)
+meanOf_data <- apply(iris[1:4],2,mean)
+sum_of_data <- apply(iris[1:4],2,sum)
+
+
+stamdard_deviation
+sum_of_data
+meanOf_data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
