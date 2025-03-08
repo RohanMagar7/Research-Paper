@@ -124,43 +124,28 @@ verginica <- rbind(iris[iris$Species == 'virginica',])
 View(verginica)
 
 
-ind <- sample(1:nrow(setosa), nrow(setosa) * 0.8)
-View(ind)
-
-iris.train <- rbind(setosa[ind,],versicolor[ind,], verginica[ind,])
-
-iris.test <- rbind(setosa[-ind,] , versicolor[-ind,] , verginica[-ind,])
+ind <- sample(1:nrow(setosa), nrow(setosa) * 0.8)  # Randomly selecting 80% data for training
+iris.train <- rbind(setosa[ind,], versicolor[ind,], verginica[ind,])  # Training dataset
+iris.test <- rbind(setosa[-ind,] , versicolor[-ind,] , verginica[-ind,])  # Test dataset
 
 
 
-View(iris.train)
-View(iris.test)
+error <- c()  # Empty vector to store errors
+
+ggplot(data = data.frame(error), aes(x = 1:15, y = error)) +
+  geom_line(color= 'blue')  # Plot error rates for different K values
 
 
-iris[,1:4] <- scale(iris[,1:4])
-# Finding optimum value of K
-error <- c()
-
-for(i in 1:15){
-  knn.fit <- knn(train = iris.train[,1:4] , test = iris.test[,1:4] , CI = iris.train$Species , k = i)
-  error[i] = 1 - mean(knn.fit == iris.test$Species)
+for (i in 1:15){
+  knn.fit <- knn(train = iris.train[,1:4],
+                 test = iris.test[,1:4],
+                 CI = iris.train$Species,
+                 k = i)
+  error[i] = 1 - mean(knn.fit == iris.test$Species) # Calculating error for each K 
 }
 
-ggplot(data = data.from(error), aes(x = 1:15, y = error))+
-  geom_line(color= 'blue')
-
-
-# confusion matrix 
-iris_pred <- knn(train = iris.trin[,1:4]
-                 test = iris.test[,1:4] , CI = iris.train$Species , k = 5 ) 
-table(iris.test$Species, iris_pred)
-
-
-
-
-
-
-
+ggplot(data = data.from(error) , aes(x= 1:15 , y = error)) + 
+  geom_line(color = 'blue')) # plot error rates for differnt k value of    
 
 
 
