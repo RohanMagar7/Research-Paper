@@ -148,6 +148,48 @@ print(knn.pred)
 # Evaluate model performance 
 #Create a confusion matrix 
 
+confusion_matrix <- table(predicted = knn.pred , 
+                          actual = testY)
+print(confusion_matrix)
+
+# calculate accuracy
+accuracy <- sum(diag(confusion_matrix)) / sum(confusion_matrix)
+
+print(paste("accuracy",round(accuracy* 100 , 2) , '%'))
+
+
+# find the optimal K using Error rate findnig the best K value
+error_rate <- numeric(15)
+
+for (k in 1:15){
+  knn.read <- knn(train = trainX , test = testX , cl = trainY , k = k )
+  error_rate[k] <- mean(knn.pred != testY)
+}
+
+# convert to dataframe for plotting 
+error_df <- data.frame(k = 1: 15 , Error = error_rate)
+
+# plot k vs error rate 
+ggplot(error_df, aes(x = k , y= Error)) + 
+  geom_line(color = 'blue') + 
+  geom_point(color = 'red') + 
+  ggtitle('Error Rate Vs K in in Knn ') + 
+  xlab('K ( Number of Neighbor)') + 
+  ylab('Error Rate') + 
+  theme_minimal()
+
+#++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
 
 
 
