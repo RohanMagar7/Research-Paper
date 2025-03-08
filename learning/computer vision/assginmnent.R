@@ -111,8 +111,27 @@ stamdard_deviation
 sum_of_data
 meanOf_data
 
+par(mfrow = c(1,1))
+hist(iris$Sepal.Length, col = 'green', breaks = 20)
+hist(iris$Sepal.Width , col = 'green',breaks = 20)
+hist(iris$Petal.Length, col = 'green' , breaks = 20)
+hist(iris$Petal.Width, col = 'green' , breaks = 20)
 
 
+
+# plot scatter plot
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width , col= Species )) +
+  geom_point()
+
+
+ggplot(iris,aes(x = Petal.Length, y = Petal.Width, col=Species)) + 
+  geom_point()
+
+
+
+
+
+library()
 
 
 
