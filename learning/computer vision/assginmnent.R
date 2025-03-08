@@ -107,45 +107,73 @@ ggplot(iris,aes(x = Petal.Length, y = Petal.Width, col=Species)) +
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-set.seed(12340352)
-iris[1:4] <- scale(iris[1:4])
-
-View(iris)
-
-setosa <- rbind(iris[iris$Species == 'setosa',])
-
-View(setosa)
-
-versicolor <- rbind(iris[iris$Species == 'versicolor',])
-View(versicolor)
+library(class)
+library(ggplot2)
+library(caret)
 
 
-verginica <- rbind(iris[iris$Species == 'virginica',])
-View(verginica)
+# scale numetic features ( standardized to ) mean = 0, std = 0
+iris[,1:4] <- scale(iris[,1:4])
 
 
-ind <- sample(1:nrow(setosa), nrow(setosa) * 0.8)  # Randomly selecting 80% data for training
-iris.train <- rbind(setosa[ind,], versicolor[ind,], verginica[ind,])  # Training dataset
-iris.test <- rbind(setosa[-ind,] , versicolor[-ind,] , verginica[-ind,])  # Test dataset
+#split dataset into trainig ( 80% ) and testing ( 20% )
+
+set.seed(123)
+trainIndex <- createDataPartition(iris$Species , p=0.8 , list = FALSE)
+iris.train <- iris[trainIndex,]
+iris.test <- iris[-trainIndex,]
+
+
+# Extract predictor variable ( x ) and taraget labels ( y )
+trainX <- iris.train[,1:4]
+trainY <- iris.train$Species
+testX <- iris.test[,1:4]
+testY <- iris.test$Species
+
+
+# apply knn classficiation 
+# choose k = 5(default value) 
+
+k_value <- 5 
+
+# perform KNN classfication 
+knn.pred <- knn(train = trainX, test = testX , cl = trainY, k = k_value)
 
 
 
-error <- c()  # Empty vector to store errors
-
-ggplot(data = data.frame(error), aes(x = 1:15, y = error)) +
-  geom_line(color= 'blue')  # Plot error rates for different K values
+# Print predictions 
+print(knn.pred)
 
 
-for (i in 1:15){
-  knn.fit <- knn(train = iris.train[,1:4],
-                 test = iris.test[,1:4],
-                 CI = iris.train$Species,
-                 k = i)
-  error[i] = 1 - mean(knn.fit == iris.test$Species) # Calculating error for each K 
-}
+# Evaluate model performance 
+#Create a confusion matrix 
 
-ggplot(data = data.from(error) , aes(x= 1:15 , y = error)) + 
-  geom_line(color = 'blue')) # plot error rates for differnt k value of    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
