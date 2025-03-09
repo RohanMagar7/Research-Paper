@@ -250,6 +250,37 @@ confmatrix <- table(sub.test[,3],pre)
 confmatrix
 
 
+################+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# steps to pe
+
+
+#1 scale the dataset
+iris[,1:4] <- scale(iris[,1:4])
+
+
+
+View(iris)
+
+# step 2.  split dataset into training ( 80% ) and testing ( 20 % )
+
+set.seed(123)
+trainIndex <- createDataPartition()
+
+library(caTools)
+
+# split by dependent variable 
+split_data <- sample.split(iris$Species , SplitRatio = 0.75)
+iris.train <- subset(iris,split_data == TRUE)
+iris.test <- subset(iris,split_data == FALSE)
+
+
+
+
+
+
+
+
 
 
 
