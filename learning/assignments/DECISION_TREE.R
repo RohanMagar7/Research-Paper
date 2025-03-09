@@ -47,12 +47,14 @@ df_prediction
 
 rpart.plot(dt_classfier , type = 4 , extra = 101)
 
+# evaluate the model 
+conf_matrix <- table(predicted = df_prediction , Actual = test_data$Species)
+diag_sum <- sum(diag(confmatrix))
+sum_all <- sum(confmatrix)
+accuracy <- diag_sum / sum_all
 
-
-
-
-
-
+print(diag_sum/sum_all)
+paste('Accuracy', round(accuracy * 100  , 4) )
 
 
 
