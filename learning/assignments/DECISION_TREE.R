@@ -1,5 +1,8 @@
 library(caTools)
 library(rpart)
+library(rpart)
+library(rpart.plot)
+
 
 dt <- read.csv(path)
 dt <- dt[3:5]
@@ -12,14 +15,13 @@ split <- sample.split(dt$Purchased , SplitRatio =  0.75)
 dt.train <- subset(dt , split == TRUE)
 dt.test <- subset(dt,split == FALSE)
 
-
-
 dtclassifier <- rpart(formula = Purchased ~ .,data = dt.train)
 
+dtpredict <- predict(dtclassifier , newdata = dt.test[-3])
 
 
-
-
+# Visualize the tree
+rpart.plot(dtclassifier, type = 4, extra = 101)
 
 
 
