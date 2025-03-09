@@ -95,3 +95,87 @@ cat('length of the vector is : ',length(my_vector))
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+# import libraries in R programming 
+# Note : If not install already install it ✅
+library(class)  
+library(ggplot2)
+library(caret)  
+
+
+# 👀✅  :Load and  Prepare  Data 
+
+# Load the built-in Iris dataset
+data(iris)
+
+# Scale numeric features (standardize to mean=0, std=1)
+iris[, 1:4] <- scale(iris[, 1:4])
+
+# Split dataset into training (80%) and testing (20%)
+set.seed(123)  # Ensure reproducibility
+trainIndex <- createDataPartition(iris$Species, p = 0.8, list = FALSE)
+iris.train <- iris[trainIndex, ]
+iris.test <- iris[-trainIndex, ]
+
+# Extract predictor variables (❌) and target labels (y✅)
+trainX <- iris.train[, 1:4]
+trainY <- iris.train$Species
+testX <- iris.test[, 1:4]
+testY <- iris.test$Species
+
+
+## ✅ Apply  KnNN
+# Choose K = 5 (default value)
+k_value <- 5
+
+# Perform KNN classification
+knn.pred <- knn(train = trainX, test = testX, cl = trainY, k = k_value)
+
+# Print predictions
+print(knn.pred)
+
+
+# 🔗 Evaluate Model
+# Create a confusion matrix
+conf_matrix <- table(Predicted = knn.pred, Actual = testY)
+print(conf_matrix)
+
+# Calculate accuracy
+accuracy <- sum(diag(conf_matrix)) / sum(conf_matrix)
+print(paste("Accuracy:", round(accuracy * 100, 2), "%"))
+
+
+# ♾ 🥉 Find optimal "k"
+
+# Finding the best K value
+error_rate <- numeric(15)
+
+for (k in 1:15) {
+  knn.pred <- knn(train = trainX, test = testX, cl = trainY, k = k)
+  error_rate[k] <- mean(knn.pred != testY)  # Misclassification rate
+}
+
+# Convert to dataframe for plotting
+error_df <- data.frame(K = 1:15, Error = error_rate)
+
+# Plot K vs Error Rate
+ggplot(error_df, aes(x = K, y = Error)) +
+  geom_line(color = 'blue') +
+  geom_point(color = 'red') +
+  ggtitle("Error Rate vs K in KNN") +
+  xlab("K (Number of Neighbors)") +
+  ylab("Error Rate") +
+  theme_minimal()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
