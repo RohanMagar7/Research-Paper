@@ -44,9 +44,20 @@ ggplot(iris, aes(x = Sepal.Length , y = Sepal.Width , color = Cluster)) +
 
 #++++++++++++++++++++++++++++++++++=+++++++++++++++++++++++++++++++++++++++++
 
+set.seed(123)
+n_sample <- 20 
+x <- matrix(rnorm(n_sample), ncol = 2 )
+
+distance_matrix <- dist(x , method = 'euclidean')
+hierachical_iris <- hclust(distance_matrix, method = 'complete')
+
+# plot the dendrogram 
+plot(hierachical_iris , main = 'Hierachical clusering Dendrogram ', xlab = 'sample index' , ylab = 'distance')
+
+# cut teh dendrogram to get clusters 
+k <- 3 # Number of clusters 
+clusters <- cutree(hierachical_iris, k )
 
 
-
-
-
-
+# Visualize the clusters 
+plot(x , col = clusters , pch = 19 , main = 'Hierachical clustering ' , xlab = 'Featur' , ylab = 'feature 2')
