@@ -275,6 +275,33 @@ iris.train <- subset(iris,split_data == TRUE)
 iris.test <- subset(iris,split_data == FALSE)
 
 
+# Extract Predicator variable ( x ) and target variable ( y )
+trainX <- iris.train[,1:4]
+testX <- iris.test[,1:4]
+trainY <- iris.train$Species
+testY <- iris.test$Species
+
+
+
+# perform knn 
+knn.predict <- knn(train = trainX, test = testX , cl = trainY , k = 5)
+
+
+knn.predict
+testY
+
+
+# evaluate model 
+conf_matrix <- table(prediccted = knn.predict , Actual = testY)
+conf_matrix
+
+
+
+
+### calculate accuracy 
+accuracy <- sum(diag(conf_matrix)) / sum(conf_matrix)
+
+accuracy
 
 
 
