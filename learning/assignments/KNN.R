@@ -102,5 +102,9 @@ ggplot(data.frame(K = 1:15, Error = error_rate), aes(x = K, y = Error)) +
 
 set.seed(123)
 runif(3)
+#+++++++++++++++++++++++++++++++++++++++++++++
+
+
+
 
 
