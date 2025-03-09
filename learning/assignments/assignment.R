@@ -27,10 +27,8 @@ str(dataset)
 
 
 
-
 #load required library
 library(e1071)
-
 
 #Create first matrix
 A = matrix(c(1,2,3,4,5,6),nrow = 2,ncol = 3)
@@ -45,28 +43,10 @@ div = A / B
 print(sum)
 print(sub)
 print(mul)
-print(div)
-
-
-
-
-
-
-
+print(di
 tens <- array(1:24,dim=c(2,3,4))
 
 print(tens)
-
-
-
-
-
-
-
-
-
-
-
 
 matrix_2d <- matrix(1:4, nrow=2)
 print(matrix_2d)
@@ -116,6 +96,9 @@ trainIndex <- createDataPartition(iris$Species, p = 0.8, list = FALSE)
 iris.train <- iris[trainIndex, ]
 iris.test <- iris[-trainIndex, ]
 
+
+
+
 # Extract predictor variables (❌) and target labels (y✅)
 trainX <- iris.train[, 1:4]
 trainY <- iris.train$Species
@@ -148,6 +131,7 @@ print(paste("Accuracy:", round(accuracy * 100, 2), "%"))
 
 # Finding the best K value
 error_rate <- numeric(15)
+error_rate
 
 for (k in 1:15) {
   knn.pred <- knn(train = trainX, test = testX, cl = trainY, k = k)
@@ -165,13 +149,7 @@ ggplot(error_df, aes(x = K, y = Error)) +
   xlab("K (Number of Neighbors)") +
   ylab("Error Rate") +
   theme_minimal()
-
-
-
-
-
-
-
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 
