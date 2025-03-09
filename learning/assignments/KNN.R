@@ -17,14 +17,20 @@ normalize <- function(x) {
 # Apply normalization to the first four columns (features)
 iris_norm <- as.data.frame(lapply(iris[,1:4], normalize))
 
+
 # Add the Species column back
 iris_norm$Species <- iris$Species
+
+View(iris_norm)
 
 # Split into train and test sets (80% train, 20% test)
 set.seed(123)
 train_index <- sample(1:nrow(iris), 0.8 * nrow(iris))
+
+
 train_data <- iris_norm[train_index, ]
 test_data  <- iris_norm[-train_index, ]
+
 
 # Separate features and labels
 train_x <- train_data[,1:4]
@@ -39,12 +45,6 @@ knn_pred <- knn(train = train_x, test = test_x, cl = train_y, k = 5)
 # Evaluate model accuracy
 accuracy <- mean(knn_pred == test_y)
 print(paste("Model Accuracy:", round(accuracy * 100, 2), "%"))
-
-
-
-
-
-
 
 
 # Create a grid for plotting decision boundary
@@ -94,5 +94,13 @@ ggplot(data.frame(K = 1:15, Error = error_rate), aes(x = K, y = Error)) +
   theme_minimal()
 
 
+
+
+
+
+#)__+++++++++++++++++++++++++++++++++++
+
+set.seed(123)
+runif(3)
 
 
