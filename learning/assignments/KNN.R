@@ -105,6 +105,157 @@ runif(3)
 #+++++++++++++++++++++++++++++++++++++++++++++
 
 
+loan <- read.csv('F:/R programming/learning/assignments/learning dataset/german.csv')
+head(loan)
+
+
+
+loan <- read.csv('F:/R programming/learning/assignments/learning dataset/loan.csv')
+
+library(dplyr)
+
+loan_subset <- loan %>%
+  select(bank_asset_value, no_of_dependents, education , self_employed
+         ,income_annum , loan_amount , loan_term , cibil_score, residential_assets_value,
+         commercial_assets_value ,luxury_assets_value , bank_asset_value , loan_status
+         )
+
+loan_subset <- as.data.frame(loan_subset)
+
+
+normalize <- function(x){
+  return((x-min(x))/(max(x)) - (min(x)) )
+  
+}
+
+loan_subset$bank_asset_value <- apply(loan_subset[, "bank_asset_value", drop = FALSE], 2, normalize)
+
+loan_subset$residential_assets_value <- apply(loan_subset[,'residential_assets_value', drop=FALSE], 2 , normalize)
+
+loan_subset$income_annum <- apply(loan_subset[,'income_annum',drop=FALSE], 2, normalize)
+
+loan_subset$loan_amount <- apply(loan_subset[,'loan_amount',drop = FALSE] , 2 , normalize)
+
+loan_subset$commercial_assets_value <- apply(loan_subset[,'commercial_assets_value', drop = FALSE], 2, normalize)
+
+loan_subset$cibil_score <- apply(loan_subset[,'cibil_score' , drop = FALSE] , 2, normalize)
+
+loan_subset$loan_term <- apply(loan_subset[,'loan_term',drop = FALSE] , 2, normalize)
+
+loan_subset$luxury_assets_value <- apply(loan_subset[,'luxury_assets_value', drop = FALSE] ,2 ,normalize)
+
+
+
+
+
+
+loan_subset$bank_asset_value <- loan_sub
+
+
+self_employed <- as.numeric(as.factor(loan_subset$self_employed))
+
+self_employed
+loan_subset$education <- edu
+
+
+loan_subset <- loan_subset %>%
+  mutate(loan_stat)
+
+
+
+loan_subset$loan_status <- ifelse(loan_subset$loan_status == "Approved", 1, 0)
+
+
+category <- function(category) {
+  ifelse(trimws(tolower(category)) == "approved", 1, 0)
+}
+
+grad <- function(grad){
+  ifelse(trimws(tolower(grad)) == 'graduate', 1 , 0)
+}
+
+cat <- apply(loan_subset[, "loan_status", drop = FALSE], 2, category)
+View(cat)
+
+selfemp <- function(category){
+  ifelse(trimws(tolower(category)) == 'yes' , 1 , 0 )
+}
+loan_subset$self_employed <- apply(loan_subset[,'self_employed',drop = FALSE] , 2, selfemp)
+
+
+
+graduation <- apply(loan_subset[,"education" , drop=FALSE] , 2, grad)
+View(graduation)
+
+loan_subset$loan_status <- cat
+loan_subset$education <- graduation
+
+View(loan_subset)
+
+
+set.seed(123)
+dat.d <- sample(1:nrow(loan_subset))
+
+loan_subset <- as.matrix(loan_subset)
+loan_subset <- as.data.frame(loan_subset)
+
+colnames(loan_subset) <- c("bank_asset_value", "no_of_dependents", "education" , "self_employed"
+                           ,"income_annum" , "loan_amount" , "loan_term" , "cibil_score", "residential_assets_value",
+                           "commercial_assets_value" ,"luxury_assets_value" , "bank_asset_value" , "loan_status")
+
+
+
+
+############################################+++++++++++++++++++++++++++++++++++++++++++++++
+
+path <- 'F:/R programming/learning/assignments/learning dataset/snads.csv'
+
+dataset <- read.csv(path)
+
+
+sub <- dataset[3:5]
+sub$Purchased <- factor(sub$Purchased , levels= c(0,1))
+head(sub)
+View(sub)
+
+install.packages("caTools")
+library(caTools)
+library(class)
+
+
+set.seed(123)
+split_d <- sample.split(sub$Purchased, SplitRatio = 0.75 )
+ 
+sub.train <- subset(sub,split_d == TRUE)
+sub.test <- subset(sub,split_d == FALSE)
+
+nrow(sub.train)
+nrow(sub.test)
+nrow(sub)
+
+View(sub)
+
+###3 Feature scaling 
+
+sub.train[-3] <- scale(sub.train[-3])
+sub.test[-3] <- scale(sub.test[-3])
+
+View(sub.train)
+
+pre <- knn(train = sub.train[-3],test = sub.test[-3], cl = sub.train[,3], k = 5 )
+
+
+### create confusion matrix 
+confmatrix <- table(sub.test[,3],pre)
+confmatrix
+
+
+
+
+
+
+
+
 
 
 
