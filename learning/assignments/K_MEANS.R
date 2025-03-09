@@ -24,6 +24,17 @@ ggplot(iris,aes(x = Sepal.Length, y = Sepal.Width , colour = cluster)) +
   theme_minimal()
 
 
+centers <- as.data.frame(kmeans_result$centers)
+
+# Scatter plot with centroids
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = cluster)) +
+  geom_point(size = 3, alpha = 0.6) +  # Plot data points
+  geom_point(data = centers, aes(x = Sepal.Length, y = Sepal.Width), 
+             color = "black", shape = 8, size = 5) +  # Plot centroids
+  labs(title = "K-Means Clustering of Iris Dataset with Centroids",
+       x = "Sepal Length", y = "Sepal Width") +
+  theme_minimal()
+
 
 
 
