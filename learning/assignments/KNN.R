@@ -303,11 +303,37 @@ accuracy <- sum(diag(conf_matrix)) / sum(conf_matrix)
 
 accuracy
 
+print(paste('accuracy',round(accuracy * 100  , 2)))
+### fint optimal K using Error Rate 
+# finding the best k values 
+error_rate <- numeric(15)
+error_rate
+
+for ( k in 1:15){
+  knn.predict <- knn(train = trainX, test = testX , cl = trainY , k = k )
+  error_rate[k] <- mean(knn.predict != testY)
+}
+
+error_rate
+
+error_df <- data.frame(k = 1:15 , error_rate)
+error_df
+View(error_df)
+
+library(ggplot2)
+# plot K vs Error Rate
+ggplot(error_df , aes(x = k , y = error_rate)) +
+  geom_line(color = 'green') + 
+  geom_point(color = 'blue')+ 
+  ggtitle('Error Rate Vs K in KNN') + 
+  xlab('K ( Number of Neighbors ) ') + 
+  ylab(' Error Rate ') + 
+  theme_minimal()
 
 
 
 
-
+    
 
 
 
