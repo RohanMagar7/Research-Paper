@@ -24,15 +24,36 @@ dtpredict <- predict(dtclassifier , newdata = dt.test[-3])
 rpart.plot(dtclassifier, type = 4, extra = 101)
 
 
- ####++++++++++++++++++++++++++++++++++++++++++++
+####+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 library(rpart)
+library(rpart.plot)
 
 ### step 2 ✅ split  tthe  dataa  into  training &  testing sets 
-
-
 set.seed(123)
 
 # split data ( 80)
+train_index <- sample(1:nrow(iris) , 0.8 * nrow(iris))
+train_data <- iris[train_index,]
+test_data <- iris[-train_index,]
+View(test_data[-5])
+
+## Train Decision Tree Classifier 
+dt_classfier <- rpart(Species ~ ., data = train_data ,method = 'class' )
+
+# make prediction on test data 
+df_prediction <- predict(dt_classfier, newdata = test_data[-5] , type = 'class')
+df_prediction
+
+rpart.plot(dt_classfier , type = 4 , extra = 101)
+
+
+
+
+
+
+
+
 
 
 
