@@ -22,6 +22,8 @@ plot(dend, main = 'Colored Dendrogram of Iris Dataset')
 
 
 
+### optional 
+
 # Step 6 : cut the tree from from center 🌴 
 clusters <- cutree(hc, k = 3)
 
@@ -30,3 +32,17 @@ iris$Cluster <- as.factor(clusters)
 
 # View first few rows
 head(iris)
+
+# plot the cluster
+ggplot(iris, aes(x = Sepal.Length , y = Sepal.Width , color = Cluster)) + 
+  geom_point(size = 3 , alpha = 0.7) + 
+  labs( title = 'Hierachical clustering : Sepal Length Vs width',
+        x = 'Sepal Length',
+        y = 'Sepal Width') + 
+  theme_minimal()
+
+
+
+
+
+
