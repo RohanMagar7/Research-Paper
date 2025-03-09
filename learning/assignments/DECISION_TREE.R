@@ -24,8 +24,15 @@ dtpredict <- predict(dtclassifier , newdata = dt.test[-3])
 rpart.plot(dtclassifier, type = 4, extra = 101)
 
 
+ ####++++++++++++++++++++++++++++++++++++++++++++
+library(rpart)
+
+### step 2 ✅ split  tthe  dataa  into  training &  testing sets 
 
 
+set.seed(123)
+
+# split data ( 80)
 
 
 
