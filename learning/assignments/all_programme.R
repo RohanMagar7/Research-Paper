@@ -156,6 +156,7 @@ predictions <- predict(dt_model, test_data, type = "class")
 conf_matrix <- confusionMatrix(predictions, test_data$Species)
 print(conf_matrix)
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+### knn classification 
 
 
 
