@@ -85,5 +85,30 @@ ggplot(data = NULL, aes(x=test_data$medv, y=predictions)) +
   ylab("Predicted Prices") +
   theme_minimal()
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#### HIERARCHICAL CLUSTERING >>>>>>>>>.
+# Step 1: Load the dataset
+data(iris)
+
+# Step 2: Remove the categorical column (Species) and normalize the numeric data
+iris_data <- scale(iris[, -5])  # Standardizing features
+
+# Step 3: Compute the Euclidean distance matrix
+dist_matrix <- dist(iris_data, method = "euclidean")
+
+# Step 4: Apply Hierarchical Clustering using Complete Linkage
+hc <- hclust(dist_matrix, method = "complete")
+
+# Step 5: Plot the Dendrogram
+plot(hc, main = "Hierarchical Clustering Dendrogram", xlab = "", ylab = "Height", sub = "")
+rect.hclust(hc, k = 3, border = c("red", "blue", "green"))  # Draws 3 clusters
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
 
 
