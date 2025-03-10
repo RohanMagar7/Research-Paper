@@ -128,7 +128,34 @@ ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Cluster)) +
   labs(title = "K-Means Clustering (Iris Dataset)", x = "Petal Length", y = "Petal Width") +
   theme_minimal()
 #_++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-##
+## DECision tree 
+# Load necessary libraries
+library(rpart)
+library(rpart.plot)
+library(caret)
+
+# Step 1: Load the Iris dataset
+data(iris)
+
+# Step 2: Split the dataset (80% Train, 20% Test)
+set.seed(123)  # For reproducibility
+train_index <- sample(1:nrow(iris), 0.8 * nrow(iris))
+train_data <- iris[train_index, ]
+test_data <- iris[-train_index, ]
+
+# Step 3: Train a Decision Tree model
+dt_model <- rpart(Species ~ ., data = train_data, method = "class")
+
+# Step 4: Visualize the Decision Tree
+rpart.plot(dt_model, main = "Decision Tree for Iris Dataset", type = 4, extra = 101)
+
+# Step 5: Make predictions
+predictions <- predict(dt_model, test_data, type = "class")
+
+# Step 6: Evaluate Model Performance
+conf_matrix <- confusionMatrix(predictions, test_data$Species)
+print(conf_matrix)
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 
