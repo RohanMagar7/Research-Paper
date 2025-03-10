@@ -102,7 +102,33 @@ hc <- hclust(dist_matrix, method = "complete")
 plot(hc, main = "Hierarchical Clustering Dendrogram", xlab = "", ylab = "Height", sub = "")
 rect.hclust(hc, k = 3, border = c("red", "blue", "green"))  # Draws 3 clusters
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#k-MEAN CLUSTERING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# Load necessary library
+library(ggplot2)
 
+# Step 1: Load the dataset
+data(iris)
+
+# Step 2: Remove the categorical column (Species) and normalize the numeric data
+iris_data <- scale(iris[, -5])  # Standardizing features
+
+# Step 3: Apply K-Means clustering (Choose k=3 since there are 3 species)
+set.seed(123)  # Ensures reproducibility
+kmeans_result <- kmeans(iris_data, centers = 3, nstart = 25)
+
+# Step 4: Add the cluster results to the dataset
+iris$Cluster <- as.factor(kmeans_result$cluster)
+
+# Step 5: Visualize the clusters with centroids
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Cluster)) +
+  geom_point(size = 3, alpha = 0.7) +
+  geom_point(data = as.data.frame(kmeans_result$centers), 
+             aes(x = Petal.Length, y = Petal.Width), 
+             color = "black", shape = 8, size = 5) +
+  labs(title = "K-Means Clustering (Iris Dataset)", x = "Petal Length", y = "Petal Width") +
+  theme_minimal()
+#_++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+##
 
 
 
