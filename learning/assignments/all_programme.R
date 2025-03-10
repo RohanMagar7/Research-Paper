@@ -157,6 +157,37 @@ conf_matrix <- confusionMatrix(predictions, test_data$Species)
 print(conf_matrix)
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ### knn classification 
+# Load necessary libraries
+library(class)  # For KNN
+library(caret)  # For evaluation
+library(datasets)
+
+# Step 1: Load the Iris dataset
+data(iris)
+
+# Step 2: Normalize numeric features (excluding Species)
+normalize <- function(x) {
+  return((x - min(x)) / (max(x) - min(x)))
+}
+iris_norm <- as.data.frame(lapply(iris[, 1:4], normalize))
+iris_norm$Species <- iris$Species  # Add back the species column
+
+# Step 3: Split the dataset into Training (80%) and Test (20%)
+set.seed(123)  # For reproducibility
+train_index <- sample(1:nrow(iris), 0.8 * nrow(iris))
+train_data <- iris_norm[train_index, ]
+test_data <- iris_norm[-train_index, ]
+
+# Step 4: Implement KNN classifier
+k_value <- 5  # Set k
+predictions <- knn(train = train_data[, 1:4], 
+                   test = test_data[, 1:4], 
+                   cl = train_data$Species, 
+                   k = k_value)
+
+# Step 5: Evaluate Model Performance
+conf_matrix <- confusionMatrix(predictions, test_data$Species)
+print(conf_matrix)
 
 
 
