@@ -1,27 +1,36 @@
-library(caTools)
-library(rpart)
+# for decision tree plot or use the rpart 
 library(rpart)
 library(rpart.plot)
+library(caTools)
 
-
+# step 1 : import dataset 
 dt <- read.csv(path)
+# step 2 : selection numeric data
 dt <- dt[3:5]
+
+## step 3 scale the data ( only dependent variables)
 dt[,1:2] <- scale(dt[,1:2])
 
-dt$Purchased <- factor(dt$Purchased , levels = c(0,1))
+# step 4 
+### convert independent variable into factors
+dt$Purchased <- factor(dt$Purchased , level = c(0,1))
+
+
+### step 5 split data into training and tesing 
 
 set.seed(123)
-split <- sample.split(dt$Purchased , SplitRatio =  0.75)
-dt.train <- subset(dt , split == TRUE)
-dt.test <- subset(dt,split == FALSE)
+splitList <- sample.split(dt$Purchased, SplitRatio = 0.75)
+dt.train <- subset(dt , splitList == TRUE)
+dt.test <- subset(dt,splitList == FALSE)
 
-dtclassifier <- rpart(formula = Purchased ~ .,data = dt.train)
 
-dtpredict <- predict(dtclassifier , newdata = dt.test[-3])
+# step 6 classifiy the data using rpart classifier 
+dt.classifier <- rpart(formula = Purchased ~ . , data = dt.train)
+dt.predict <- predict(dt.classifier , newdata = dt.test[-3])
 
 
 # Visualize the tree
-rpart.plot(dtclassifier, type = 4, extra = 101)
+rpart.plot(dt.classifier, type = 4, extra = 101)
 
 
 ####+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
