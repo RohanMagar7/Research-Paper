@@ -1,0 +1,13 @@
+name: diabetes_prediction
+title: diabetes_prediction
+username: 2844jj-pranav-sirsufale
+account: 2844jj-pranav-sirsufale
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14227649
+bundleId: 9932606
+url: https://2844jj-pranav-sirsufale.shinyapps.io/diabetes_prediction/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: heart_disease_prediction.nb.html|heart_disease_prediction.Rmd|predicting_diabetes_using_machine_learning.html|predicting_diabetes_using_machine_learning.Rmd

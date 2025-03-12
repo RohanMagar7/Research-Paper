@@ -96,17 +96,6 @@ server <- function(input, output) {
 }
 
 shinyApp(ui, server)
-
-
-
-
-rsconnect::setAccountInfo(name='2844jj-pranav-sirsufale',
-			  token='77C123DF938BDC87E18039C1A749921B',
-			  secret='OGdnF9RRaVaAQaDZz+GWtq0kiX37PjSRCCDtyHp2')
-
-
-rsconnect::deployApp('F:/R programming/learning/ai_project/predicting_diabetes_using_machine_learning.Rmd')
-
 ```
 
 
