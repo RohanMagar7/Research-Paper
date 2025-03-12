@@ -6,6 +6,13 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+install.packages('mlbench')
+install.package('carpet')
+install.package('ggplot2')
+
+#Load libraries
+
+
 
 ```
 
