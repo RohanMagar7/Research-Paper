@@ -5,7 +5,7 @@ date: "2025-03-12"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r}
 
 #Load libraries
 library(mlbench)
@@ -29,7 +29,7 @@ head(df)
 - Visualize data distribution using ggplot2
 
 
-```{r cars}
+```{r}
 summary(df)
 ggplot(df,aes(x = glucose,fill = diabetes)) + 
   geom_histogram(binwidth = 10 , alpha = 0.7)
@@ -40,25 +40,25 @@ ggplot(df,aes(x = glucose,fill = diabetes)) +
 
 ```{r}
 set.seed(123)
-trainIndex <- sample.split(df$diabetes , SplitRatio = 0.80)
+trainIndex <- sample.split(df$diabetes , SplitRatio = 0.90)
 train <- subset(df,trainIndex == TRUE)
 test <- subset(df,trainIndex == FALSE)
-
 
 ```
 
 ## step 4 : Train a Machine Learning Model ( Here I am using the Random Forest Algorithm )
 
 ```{r}
-install.packages("randomForest")
+library(randomForest)
 
+# Train the model 
+model <- randomForest(diabetes ~ ., data = train , ntree = 100)
 
+# Make Prediction
+predictions <- predict(model , test)
 
-
-
-```
-
-```{r }
-
+# Evaluate accuracy
+confusion_matrix <- confusionMatrix(predictions , test$diabetes)
+confusion_matrix
 
 ```
