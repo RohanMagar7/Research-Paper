@@ -21,8 +21,6 @@ summary(df)
 head(df)
 plot(df)
 
-
-
 ```
 # Data PreProcessing & Visualization
 
@@ -50,9 +48,6 @@ trainIndex <- sample.split(df$target , SplitRatio = 0.80)
 # split data 
 train <- subset(df , trainIndex)
 test <- subset(df,!trainIndex)
-
-
-
 ```
 
 # step 5 : Train a Random Forest Model 
@@ -63,7 +58,6 @@ predictions <- predict(model , test)
 
 # confusion matrix creation
 confusionMatrix(predictions,test$target)
-
 ```
 
 # Step 6: Save the Model & R Markdown File 
