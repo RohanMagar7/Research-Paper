@@ -1,10 +1,6 @@
 library(ggplot2)  
 library(dendextend)  # For better dendrogram visualization
-
-
 iris.data <- scale(iris[,-5])
-
-
 # step 3 compute distance metrics & apply hierachical clustering 
 distance_matrix <- dist(iris.data , method = 'euclidean')
 h.cluster <- hclust(distance_matrix , method = 'complete')
@@ -14,17 +10,13 @@ plot(h.cluster , main = 'Hierachical clustering Dendrogram',sub = '',xlab = '', 
 # step 5 improve the dendrogram visuallization ( convert to dendrogram object for customization)
 dend <- as.dendrogram(h.cluster)
 
-
 # plot enhance dendrogram 
 plot(dend, main = 'Colored Dendrogram of Iris Dataset')
 
-
 # step 6 : cut the tree from center 
 clusters <- cutree(h.cluster , k = 3 )
-
 # add cluster labels to dataset
 iris$Cluster <- as.factor(clusters)
-
 
 # View first few rows
 head(iris)
@@ -36,24 +28,21 @@ ggplot(iris, aes(x = Sepal.Length , y = Sepal.Width , color = Cluster)) +
         x = 'Sepal Length',
         y = 'Sepal Width') +
   theme_minimal()
-
-
 #++++++++++++++++++++++++++++++++++=+++++++++++++++++++++++++++++++++++++++++
 
 set.seed(123)
 n_sample <- 20 
-x <- matrix(rnorm(n_sample), ncol = 2 )
-
+x <- matrix(rnorm(n_sample) , ncol = 2)
 distance_matrix <- dist(x , method = 'euclidean')
-hierachical_iris <- hclust(distance_matrix, method = 'complete')
+hierachical_iris <- hclust(distance_matrix , method = 'complete')
 
 # plot the dendrogram 
-plot(hierachical_iris , main = 'Hierachical clusering Dendrogram ', xlab = 'sample index' , ylab = 'distance')
+plot(hierachical_iris , main = 'Hierachical clustering Dendrogram',xlab = 'sample Index' , ylab = 'distance')
 
-# cut teh dendrogram to get clusters 
-k <- 3 # Number of clusters 
-clusters <- cutree(hierachical_iris, k )
 
+#cut the dendrogram to get clusters
+k <- 3 
+clusters <- cutree(hierachical_iris , k)
 
 # Visualize the clusters 
 plot(x , col = clusters , pch = 19 , main = 'Hierachical clustering ' , xlab = 'Featur' , ylab = 'feature 2')
