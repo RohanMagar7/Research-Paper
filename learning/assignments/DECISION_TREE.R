@@ -40,24 +40,26 @@ library(rpart.plot)
 
 ### step 2 ✅ split  tthe  dataa  into  training &  testing sets 
 set.seed(123)
+iris[-5] <- scale(iris[-5])
+head(iris[-5])
+
 
 # split data ( 80)
-train_index <- sample(1:nrow(iris) , 0.8 * nrow(iris))
-train_data <- iris[train_index,]
-test_data <- iris[-train_index,]
-View(test_data[-5])
+train_index <- sample.split(iris$Species , SplitRatio = 0.80)
+train_data <- subset(iris,train_index == TRUE)
+test_data <- subset(iris,train_index == FALSE)
+View(train_data[-5])
 
-## Train Decision Tree Classifier 
-dt_classfier <- rpart(Species ~ ., data = train_data ,method = 'class' )
+### train the classifier of decision tree use the rpart 
+df.classifier <- rpart(Species ~ ., data = train_data , method = 'class')
+df.prediction <- predict(df.classifier, newdata = test_data[-5] , type = 'class')
 
-# make prediction on test data 
-df_prediction <- predict(dt_classfier, newdata = test_data[-5] , type = 'class')
-df_prediction
+df.prediction
 
-rpart.plot(dt_classfier , type = 4 , extra = 101)
+rpart.plot(df.classifier , type = 4 , extra = 101)
 
 # evaluate the model 
-conf_matrix <- table(predicted = df_prediction , Actual = test_data$Species)
+conf_matrix <- table(predicted = df.prediction , Actual = test_data$Species)
 diag_sum <- sum(diag(confmatrix))
 sum_all <- sum(confmatrix)
 accuracy <- diag_sum / sum_all
@@ -65,6 +67,36 @@ accuracy <- diag_sum / sum_all
 print(diag_sum/sum_all)
 paste('Accuracy', round(accuracy * 100  , 4) )
 
+#************************************************************************************
+'''
+Decision Tree
+A Decision Tree is a supervised machine learning algorithm used for both classification and regression tasks. 
+It works by splitting the dataset into branches based on feature values, forming a tree-like structure that
+helps in decision-making.
+
+How It Works:
+The dataset is divided into nodes based on the most significant feature (using criteria like Gini index 
+or entropy).
+The process continues recursively until a stopping condition is met (e.g., max depth or minimum samples per leaf).
+The final output is a tree where each path represents a decision rule.
+
+Key Components:
+Root Node: The starting point (first decision).
+Internal Nodes: Decision points based on feature values.
+Leaf Nodes: Final output (class labels or predicted values).
+
+Types of Decision Trees:
+Classification Tree: Predicts categories (e.g., spam vs. not spam).
+Regression Tree: Predicts continuous values (e.g., house prices).
+
+
+
+
+
+
+
+'''
+#************************************************************************************
 
 
 
