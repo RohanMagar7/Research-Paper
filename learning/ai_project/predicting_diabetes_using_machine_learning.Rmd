@@ -62,3 +62,47 @@ confusion_matrix <- confusionMatrix(predictions , test$diabetes)
 confusion_matrix
 
 ```
+
+```{r}
+library(shiny)
+ui <- fluidPage(
+  titlePanel("Diabetes Prediction"),
+  sidebarLayout(
+    sidebarPanel(
+      numericInput("glucose","Glucose Level",value = 100 , min = 50 , max = 200),
+      numericInput("bmi", "BMI:" ,value = 25 , min = 10 , max = 50 ),
+      actionButton("predict","Predict"),
+      mainPanel(
+        textOutput("result")
+      )
+    )
+  )
+)
+
+server <- function(input , output){
+  model <- readRDS("diabetes_model.rds")
+  
+  predict_diabetes <- 
+    eventReactive(input$predict, {
+      new_data <- data.frame(glucose = input$glucose , bmi = input$bmi)
+      predict(model, new_data)
+    })
+  
+  output$result <- renderText({
+    req(predict_diabetes())
+    pased("Prediction:" , 
+          predict_diabetes()
+          )
+  })
+  
+}
+
+
+shinyApp(ui,server)
+
+
+
+
+```
+
+
