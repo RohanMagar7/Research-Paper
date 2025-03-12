@@ -66,6 +66,7 @@ confusion_matrix
 ```{r}
 library(rsconnect)
 library(shiny)
+
 ui <- fluidPage(
   titlePanel("Diabetes Prediction"),
   sidebarLayout(
