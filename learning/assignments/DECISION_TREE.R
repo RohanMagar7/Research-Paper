@@ -1,3 +1,27 @@
+#************************************************************************************
+'''
+Decision Tree
+A Decision Tree is a supervised machine learning algorithm used for both classification and regression tasks. 
+It works by splitting the dataset into branches based on feature values, forming a tree-like structure that
+helps in decision-making.
+
+How It Works:
+The dataset is divided into nodes based on the most significant feature (using criteria like Gini index 
+or entropy).
+The process continues recursively until a stopping condition is met (e.g., max depth or minimum samples per leaf).
+The final output is a tree where each path represents a decision rule.
+
+Key Components:
+Root Node: The starting point (first decision).
+Internal Nodes: Decision points based on feature values.
+Leaf Nodes: Final output (class labels or predicted values).
+
+Types of Decision Trees:
+Classification Tree: Predicts categories (e.g., spam vs. not spam).
+Regression Tree: Predicts continuous values (e.g., house prices).
+
+'''
+#************************************************************************************
 # for decision tree plot or use the rpart 
 library(rpart)
 library(rpart.plot)
@@ -25,13 +49,12 @@ dt.test <- subset(dt,splitList == FALSE)
 
 
 # step 6 classifiy the data using rpart classifier 
-dt.classifier <- rpart(formula = Purchased ~ . , data = dt.train)
-dt.predict <- predict(dt.classifier , newdata = dt.test[-3])
+dt.classifier <- rpart(formula = Purchased ~ . , data = dt.train , method = 'class')
+dt.predict <- predict(dt.classifier , newdata = dt.test[-3] , type = 'class')
 
 
 # Visualize the tree
 rpart.plot(dt.classifier, type = 4, extra = 101)
-
 
 ####+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -42,7 +65,6 @@ library(rpart.plot)
 set.seed(123)
 iris[-5] <- scale(iris[-5])
 head(iris[-5])
-
 
 # split data ( 80)
 train_index <- sample.split(iris$Species , SplitRatio = 0.80)
@@ -66,37 +88,3 @@ accuracy <- diag_sum / sum_all
 
 print(diag_sum/sum_all)
 paste('Accuracy', round(accuracy * 100  , 4) )
-
-#************************************************************************************
-'''
-Decision Tree
-A Decision Tree is a supervised machine learning algorithm used for both classification and regression tasks. 
-It works by splitting the dataset into branches based on feature values, forming a tree-like structure that
-helps in decision-making.
-
-How It Works:
-The dataset is divided into nodes based on the most significant feature (using criteria like Gini index 
-or entropy).
-The process continues recursively until a stopping condition is met (e.g., max depth or minimum samples per leaf).
-The final output is a tree where each path represents a decision rule.
-
-Key Components:
-Root Node: The starting point (first decision).
-Internal Nodes: Decision points based on feature values.
-Leaf Nodes: Final output (class labels or predicted values).
-
-Types of Decision Trees:
-Classification Tree: Predicts categories (e.g., spam vs. not spam).
-Regression Tree: Predicts continuous values (e.g., house prices).
-
-
-
-
-
-
-
-'''
-#************************************************************************************
-
-
-
