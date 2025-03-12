@@ -6,37 +6,59 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-install.packages('mlbench')
-install.package('carpet')
-install.package('ggplot2')
 
 #Load libraries
+library(mlbench)
+library(caret)
+library(ggplot2)
+library(caTools)
 
 
+
+data("PimaIndiansDiabetes")
+df <- PimaIndiansDiabetes
+head(df)
 
 ```
 
 ## R Markdown
+**Knit**
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## step 2 ♾ clean data 
+- Check for missing values and remove or impute them.
+- Visualize data distribution using ggplot2
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-
-
+summary(df)
+ggplot(df,aes(x = glucose,fill = diabetes)) + 
+  geom_histogram(binwidth = 10 , alpha = 0.7)
 
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Step 3 : split data into ttain & Tesing set 
+
+```{r}
+set.seed(123)
+trainIndex <- sample.split(df$diabetes , SplitRatio = 0.80)
+train <- subset(df,trainIndex == TRUE)
+test <- subset(df,trainIndex == FALSE)
+
+
+```
+
+## step 4 : Train a Machine Learning Model ( Here I am using the Random Forest Algorithm )
+
+```{r}
+install.packages("randomForest")
 
 
 
+
+
+```
+
+```{r }
+
+
+```
