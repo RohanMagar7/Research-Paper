@@ -20,18 +20,18 @@ Thank you for your motivation, insightful teaching, and the opportunities to gro
 
 ## 📁 Repository Structure
 
-*R_programming/*
-*├── basics_of_R/ # Beginner-friendly R scripts and fundamentals*
-*├── certificates/ # Certificates earned during the learning journey*
-*├── data_cleaning/ # Scripts for cleaning and preparing raw datasets*
-*├── data_files/ # Practice datasets and input data*
-*├── data_manipulation/ # Data transformation techniques and scripts*
-*├── data_structures/ # R data structures: vectors, lists, data frames, etc.*
-*├── data_visualization/ # Charts and plots using ggplot2 and base R*
-*├── methods/ # Statistical and analytical methods implemented*
-*├── notes/ # Theoretical notes and learning summaries*
-*├── research_methodology/ # Research techniques applied in data analysis*
-*└── books_and_study_material/ # Reference books and additional study resources*
+-*R_programming/*
+-*├── basics_of_R/ # Beginner-friendly R scripts and fundamentals*
+-*├── certificates/ # Certificates earned during the learning journey*
+-*├── data_cleaning/ # Scripts for cleaning and preparing raw datasets*
+-*├── data_files/ # Practice datasets and input data*
+-*├── data_manipulation/ # Data transformation techniques and scripts*
+-*├── data_structures/ # R data structures: vectors, lists, data frames, etc.*
+-*├── data_visualization/ # Charts and plots using ggplot2 and base R*
+-*├── methods/ # Statistical and analytical methods implemented*
+-*├── notes/ # Theoretical notes and learning summaries*
+-*├── research_methodology/ # Research techniques applied in data analysis*
+-*└── books_and_study_material/ # Reference books and additional study resources*
 
 
 
